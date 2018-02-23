@@ -19,8 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
-        android:ems="10" />
+        android:hint="Name"
+        android:ems="14" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -38,8 +38,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Nickname"
-        android:ems="10" />
+        android:hint="Nickname"
+        android:ems="7" />
 
     <LinearLayout
         android:orientation="vertical"
