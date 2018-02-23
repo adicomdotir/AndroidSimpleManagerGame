@@ -14,6 +14,8 @@ import ir.adicom.app.soccermanagerapp.model.Team;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
+    private Context context;
+
     private static final int DATABASE_VERSION = 1;
 
     private static final String DATABASE_NAME = "manager";
@@ -34,6 +36,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
     }
 
     @Override
@@ -57,11 +60,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public void deleteAllTable(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TEAM);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PLAYER);
+        onCreate(db);
+    }
+
     void addTeam(Team team) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_ID, team.getId());
+        // values.put(KEY_ID, team.getId());
         values.put(KEY_NAME, team.getName());
         values.put(KEY_NICKNAME, team.getNickname());
 
@@ -91,7 +101,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public List<Team> getAllTeams() {
-        List<Team> teamList = new ArrayList<Team>();
+        List<Team> teamList = new ArrayList<>();
 
         String selectQuery = "SELECT  * FROM " + TABLE_TEAM + "";
 
@@ -144,7 +154,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_PLAYER_ID, Player.getId());
+        // values.put(KEY_PLAYER_ID, Player.getId());
         values.put(KEY_PLAYER_NAME, Player.getName());
         values.put(KEY_PLAYER_INJURY, Player.getInjury());
         values.put(KEY_PLAYER_MORALE, Player.getMorale());
