@@ -3,33 +3,37 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:title="Home" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_players"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:title="Players" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_matches"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="Matches" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_league"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="League" />
+        <item
+            android:id="@+id/nav_transfers"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Transfers" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Others">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/nav_about"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="About App" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_contact"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="Contact Us" />
         </menu>
     </item>
 
