@@ -9,6 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import ir.adicom.app.soccermanagerapp.data.DatabaseHandler;
+import ir.adicom.app.soccermanagerapp.model.Team;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -30,13 +34,23 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        initNavInfo(navigationView);
+    }
+
+    private void initNavInfo(NavigationView navigationView) {
+        DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+        Team team = db.getTeam(1);
+        TextView txtNavTeamName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_team_name);
+        txtNavTeamName.setText(team.getName());
+        TextView txtNavTeamNickname = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_team_nickname);
+        txtNavTeamNickname.setText(team.getNickname());
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }

@@ -67,7 +67,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    void addTeam(Team team) {
+    public void addTeam(Team team) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -79,7 +79,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    Team getTeam(int id) {
+    public Team getTeam(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_TEAM, new String[] { KEY_ID,
@@ -150,7 +150,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return cursor.getCount();
     }
 
-    void addPlayer(Player Player) {
+    public void addPlayer(Player Player) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -165,7 +165,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    Player getPlayer(int id) {
+    public Player getPlayer(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_PLAYER, new String[] { KEY_PLAYER_ID,

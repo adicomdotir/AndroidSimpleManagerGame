@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import ir.adicom.app.soccermanagerapp.data.DatabaseHandler;
 import ir.adicom.app.soccermanagerapp.data.GenerateOperator;
+import ir.adicom.app.soccermanagerapp.model.Team;
 
 public class RegisterActivity extends AppCompatActivity {
     private DatabaseHandler databaseHandler;
@@ -36,6 +37,10 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (edtName.length() != 0 && edtNickname.length() != 0) {
                     databaseHandler.deleteAllTable();
+                    Team team = new Team();
+                    team.setName(edtName.getText().toString());
+                    team.setNickname(edtNickname.getText().toString());
+                    databaseHandler.addTeam(team);
                     new GenerateOperator().init(databaseHandler);
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 } else {
