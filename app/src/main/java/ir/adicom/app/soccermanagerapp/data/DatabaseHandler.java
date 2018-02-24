@@ -192,10 +192,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return player;
     }
 
-    public List<Player> getAllPlayers() {
+    public List<Player> getAllPlayers(int teamId) {
         List<Player> playerList = new ArrayList<>();
 
-        String selectQuery = "SELECT  * FROM " + TABLE_PLAYER + "";
+        String selectQuery = "SELECT  * FROM " + TABLE_PLAYER + " WHERE " + KEY_PLAYER_TEAMID + "=" + teamId;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -207,8 +207,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 player.setName(cursor.getString(1));
                 player.setInjury(Integer.parseInt(cursor.getString(2)));
                 player.setMorale(Integer.parseInt(cursor.getString(3)));
-                player.setPower(Float.parseFloat(cursor.getString(4)));
-                player.setTeamId(Integer.parseInt(cursor.getString(5)));
+                player.setTeamId(cursor.getInt(4));
+                player.setPower(cursor.getFloat(5));
 
                 playerList.add(player);
             } while (cursor.moveToNext());

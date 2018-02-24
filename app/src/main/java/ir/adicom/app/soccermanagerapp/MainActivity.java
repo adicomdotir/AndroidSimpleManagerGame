@@ -11,7 +11,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ir.adicom.app.soccermanagerapp.data.DatabaseHandler;
+import ir.adicom.app.soccermanagerapp.model.Player;
 import ir.adicom.app.soccermanagerapp.model.Team;
 
 public class MainActivity extends AppCompatActivity
@@ -45,6 +49,23 @@ public class MainActivity extends AppCompatActivity
         txtNavTeamName.setText(team.getName());
         TextView txtNavTeamNickname = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_team_nickname);
         txtNavTeamNickname.setText(team.getNickname());
+
+        float overall = 0;
+        int playerCount = 0;
+        List<Player> playerList = db.getAllPlayers(1);
+        for (Player p : playerList) {
+            playerCount++;
+            overall += p.getPower();
+        }
+        overall /= (float) playerCount;
+        StringBuilder sb = new StringBuilder();
+        sb.append(team.getName() + "\n");
+        sb.append("Overall: " + overall + "\n");
+        sb.append("Position: " + 1 + "\n");
+        sb.append("Players Count: " + playerCount);
+
+        TextView txtHome = (TextView) findViewById(R.id.txt_home);
+        txtHome.setText(sb.toString());
     }
 
     @Override
