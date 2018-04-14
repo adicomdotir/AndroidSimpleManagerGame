@@ -8,18 +8,17 @@ public class Player {
     private int id;
     private int teamId;
     private String name;
-    private float power;
+    private float scoring;
     private int injury;
     private int morale;
+    private float goalkeeper;
+    private int age;
 
     public Player() {}
 
-    public Player(int id, int injury, int morale, String name, float power, int teamId) {
+    public Player(int id, String name, int teamId) {
         this.id = id;
-        this.injury = injury;
-        this.morale = morale;
         this.name = name;
-        this.power = power;
         this.teamId = teamId;
     }
 
@@ -55,19 +54,35 @@ public class Player {
         this.name = name;
     }
 
-    public float getPower() {
-        return power;
-    }
-
-    public void setPower(float power) {
-        this.power = power;
-    }
-
     public int getTeamId() {
         return teamId;
     }
 
     public void setTeamId(int teamId) {
         this.teamId = teamId;
+    }
+
+    public float getGoalkeeper() {
+        return goalkeeper;
+    }
+
+    public void setGoalkeeper(float goalkeeper) {
+        this.goalkeeper = goalkeeper;
+    }
+
+    public float getScoring() {
+        return scoring;
+    }
+
+    public void setScoring(float scoring) {
+        this.scoring = scoring;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }

@@ -11,17 +11,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import ir.adicom.app.soccermanagerapp.data.DatabaseHandler;
+import ir.adicom.app.soccermanagerapp.data.LocalData;
 import ir.adicom.app.soccermanagerapp.model.Player;
-import ir.adicom.app.soccermanagerapp.model.Team;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private DrawerLayout mDrawerLayout;
+    private Player[] players;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,36 +26,37 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        mDrawerLayout.addDrawerListener(toggle);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        players = LocalData.players;
         initNavInfo(navigationView);
     }
 
     private void initNavInfo(NavigationView navigationView) {
-        DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-        Team team = db.getTeam(1);
-        TextView txtNavTeamName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_team_name);
-        txtNavTeamName.setText(team.getName());
-        TextView txtNavTeamNickname = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_team_nickname);
-        txtNavTeamNickname.setText(team.getNickname());
-
         float overall = 0;
         int playerCount = 0;
-        List<Player> playerList = db.getAllPlayers(1);
-        for (Player p : playerList) {
-            playerCount++;
-            overall += p.getPower();
+
+        TextView navTeamName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_team_name);
+        TextView navTeamNickname = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_team_nickname);
+        navTeamName.setText(LocalData.teams[0].getName());
+        navTeamNickname.setText(LocalData.teams[0].getNickname());
+
+        for (int i = 0; i < players.length; i++) {
+            if (players[i].getTeamId() == 1) {
+                playerCount++;
+                overall += players[i].getScoring() + players[i].getGoalkeeper();
+            }
         }
-        overall /= (float) playerCount;
+        overall /= 4;
         StringBuilder sb = new StringBuilder();
-        sb.append(team.getName() + "\n");
+//        sb.append(team.getName() + "\n");
         sb.append("Overall: " + overall + "\n");
         sb.append("Position: " + 1 + "\n");
         sb.append("Players Count: " + playerCount);
@@ -68,10 +65,13 @@ public class MainActivity extends AppCompatActivity
         txtHome.setText(sb.toString());
     }
 
+
+
     @Override
     public void onBackPressed() {
-        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            mDrawerLayout.closeDrawer(GravityCompat.START);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.main2, menu);
         return true;
     }
 
@@ -105,21 +105,22 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
+        if (id == R.id.nav_camera) {
             // Handle the camera action
-        } else if (id == R.id.nav_players) {
+        } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_matches) {
+        } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_league) {
+        } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_about) {
+        } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_contact) {
+        } else if (id == R.id.nav_send) {
 
         }
 
-        mDrawerLayout.closeDrawer(GravityCompat.START);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 }

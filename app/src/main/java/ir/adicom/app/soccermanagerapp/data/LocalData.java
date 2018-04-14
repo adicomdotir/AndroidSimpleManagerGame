@@ -1,37 +1,42 @@
 package ir.adicom.app.soccermanagerapp.data;
 
+import ir.adicom.app.soccermanagerapp.model.Player;
+import ir.adicom.app.soccermanagerapp.model.Team;
+
 /**
- * Created by adicom on 2/24/18.
+ * Created by adicom on 4/14/18.
  */
 
 public class LocalData {
-    public static String[] firstNames = {
-            "Ali", "Hassan", "Hossein", "Mohammad",
-            "Sajjad", "Sadegh", "Bagher", "Reza",
-            "Musa", "Kazem", "Taghi", "Naghi",
-            "Mehdi", "Issa", "Abbas", "Karim",
-            "Aziz", "Rahim", "Akbar", "Asghar",
-            "Malek", "Yosef", "Jafar", "Ibrahim"
-    };
+    public static final int SIZE = 4;
+    public static final int PLAYER_SIZE = 10;
+    public static Team[] teams = new Team[SIZE];
+    public static Player[] players = new Player[SIZE * PLAYER_SIZE];
 
-    public static String[] lastNames = {
-            "Daei", "Hassani", "Hosseini", "Mohammadi",
-            "SajjadKhan", "Sadeghi", "Bagheri", "Rezaie",
-            "MusaKhan", "Kazemi", "TaghiOghli", "NaghiOghli",
-            "MehdiOghli", "IssaOghli", "Abbasi", "Karimi",
-            "Azizi", "Rahimi", "Akbari", "Asghari",
-            "Maleki", "Yosefi", "Jafari", "Ibrahimi"
-    };
+    public static void create(String team) {
+        teams[0] = new Team(1, team, "nothing", 0);
 
-    public static String[] teamFirstPart = {
-            "Inter", "Ac", "Fc", "Real",
-            "Atletico", "Olimpico", "Junior", "City",
-            "Lokomotive", "Shahrdari", "Naft", "Bargh"
-    };
+        for (int i = 1; i < SIZE; i++) {
+            int n = (int) Math.random() * FirstData.teamNames.length;
+            String teamName = FirstData.teamNames[n];
+            teams[i] = new Team(i + 1, teamName, "nothing", 0);
+        }
 
-    public static String[] teamLastPart = {
-            "Ardabil", "Tabriz", "Zanjan", "Urmia",
-            "Rasht", "Sari", "Tehran", "Ahvaz",
-            "Mashhad", "Shiraz", "Esfahan", "Kerman"
-    };
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < PLAYER_SIZE; j++) {
+                Player player = new Player();
+                player.setId(i * PLAYER_SIZE + j + 1);
+                player.setTeamId(i + 1);
+                int n = (int) Math.random() * FirstData.firstNames.length;
+                String fullName = FirstData.firstNames[n];
+                n = (int) Math.random() * FirstData.lastNames.length;
+                fullName += " " + FirstData.lastNames[n];
+                player.setName(fullName);
+                player.setAge((int) Math.random() * 17 + 17);
+                player.setGoalkeeper((float) Math.random() * 20);
+                player.setScoring((float) Math.random() * 20);
+                players[i * PLAYER_SIZE + j] = player;
+            }
+        }
+    }
 }

@@ -1,21 +1,27 @@
 package ir.adicom.app.soccermanagerapp;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
-import ir.adicom.app.soccermanagerapp.data.DatabaseHandler;
-import ir.adicom.app.soccermanagerapp.data.GenerateOperator;
-import ir.adicom.app.soccermanagerapp.model.Team;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import ir.adicom.app.soccermanagerapp.data.FirstData;
+import ir.adicom.app.soccermanagerapp.data.LocalData;
 
 public class RegisterActivity extends AppCompatActivity {
-    private DatabaseHandler databaseHandler;
-    private EditText edtName, edtNickname;
+    private static final String TAG = "TAG";
+    private Spinner mSpinnerTeams;
+    private String mSelectedTeam = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,28 +32,37 @@ public class RegisterActivity extends AppCompatActivity {
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         actionBar.setCustomView(R.layout.actionbar_layout);
 
-        databaseHandler = new DatabaseHandler(getApplicationContext());
+        mSpinnerTeams = (Spinner) findViewById(R.id.sp_teams);
+        List<String> teams = new ArrayList<>();
+        teams.addAll(Arrays.asList(FirstData.teamNames));
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, teams);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpinnerTeams.setAdapter(adapter);
+        mSpinnerTeams.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mSelectedTeam = parent.getItemAtPosition(position).toString();
+            }
 
-        edtName = (EditText) findViewById(R.id.edt_team_name);
-        edtNickname = (EditText) findViewById(R.id.edt_team_nickname);
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                mSelectedTeam = null;
+            }
+        });
 
         Button btnRegister = (Button) findViewById(R.id.btn_register);
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (edtName.length() != 0 && edtNickname.length() != 0) {
-                    databaseHandler.deleteAllTable();
-                    Team team = new Team();
-                    team.setName(edtName.getText().toString());
-                    team.setNickname(edtNickname.getText().toString());
-                    databaseHandler.addTeam(team);
-                    new GenerateOperator().init(databaseHandler);
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                if (mSelectedTeam == null || mSelectedTeam.length() == 0) {
+                    Toast.makeText(RegisterActivity.this, "Please select a team!!", Toast.LENGTH_SHORT).show();
                 } else {
-                    edtName.setHintTextColor(Color.RED);
-                    edtNickname.setHintTextColor(Color.RED);
+                    LocalData.create(mSelectedTeam);
+                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                 }
             }
         });
+
     }
 }

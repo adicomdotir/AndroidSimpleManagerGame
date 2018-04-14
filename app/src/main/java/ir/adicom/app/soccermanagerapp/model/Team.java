@@ -8,13 +8,15 @@ public class Team {
     private int id;
     private String name;
     private String nickname;
+    private int overral;
 
     public Team() {}
 
-    public Team(int id, String name, String nickname) {
+    public Team(int id, String name, String nickname, int overral) {
         this.id = id;
         this.name = name;
         this.nickname = nickname;
+        this.overral = overral;
     }
 
     public int getId() {
@@ -39,5 +41,13 @@ public class Team {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public int getOverral() {
+        return overral;
+    }
+
+    public void setOverral(int overral) {
+        this.overral = overral;
     }
 }
