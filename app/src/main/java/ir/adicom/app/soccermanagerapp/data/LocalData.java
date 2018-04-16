@@ -17,7 +17,7 @@ public class LocalData {
         teams[0] = new Team(1, team, "nothing", 0);
 
         for (int i = 1; i < SIZE; i++) {
-            int n = (int) Math.random() * FirstData.teamNames.length;
+            int n = (int) (Math.random() * FirstData.teamNames.length);
             String teamName = FirstData.teamNames[n];
             teams[i] = new Team(i + 1, teamName, "nothing", 0);
         }
@@ -27,14 +27,14 @@ public class LocalData {
                 Player player = new Player();
                 player.setId(i * PLAYER_SIZE + j + 1);
                 player.setTeamId(i + 1);
-                int n = (int) Math.random() * FirstData.firstNames.length;
+                int n = (int) (Math.random() * FirstData.firstNames.length);
                 String fullName = FirstData.firstNames[n];
-                n = (int) Math.random() * FirstData.lastNames.length;
+                n = (int) (Math.random() * FirstData.lastNames.length);
                 fullName += " " + FirstData.lastNames[n];
                 player.setName(fullName);
-                player.setAge((int) Math.random() * 17 + 17);
-                player.setGoalkeeper((float) Math.random() * 20);
-                player.setScoring((float) Math.random() * 20);
+                player.setAge((int) (Math.random() * 17 + 17));
+                player.setGoalkeeper((float) (Math.random() * 20) + 1);
+                player.setScoring((float) (Math.random() * 20) + 1);
                 players[i * PLAYER_SIZE + j] = player;
             }
         }
