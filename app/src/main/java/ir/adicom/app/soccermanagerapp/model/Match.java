@@ -4,7 +4,7 @@ package ir.adicom.app.soccermanagerapp.model;
  * Created by adicom on 4/20/18.
  */
 
-public class Matches {
+public class Match {
     private int id;
     private int teamHome;
     private int teamAway;
@@ -12,9 +12,9 @@ public class Matches {
     private int goalTeamAway;
     private int weekId;
 
-    public Matches() {}
+    public Match() {}
 
-    public Matches(int goalTeamAway, int goalTeamHome, int id, int teamAway, int teamHome, int weekId) {
+    public Match(int goalTeamAway, int goalTeamHome, int id, int teamAway, int teamHome, int weekId) {
         this.goalTeamAway = goalTeamAway;
         this.goalTeamHome = goalTeamHome;
         this.id = id;

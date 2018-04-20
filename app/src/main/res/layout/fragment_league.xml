@@ -4,10 +4,78 @@
     android:layout_height="match_parent"
     tools:context="ir.adicom.app.soccermanagerapp.views.LeagueFragment">
 
-    <TextView
-        android:id="@+id/tv_test"
+    <TableLayout
+        android:id="@+id/table"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:text="Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textStyle="normal|bold" />
+            <TextView
+                android:text="G"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textStyle="normal|bold" />
+            <TextView
+                android:text="W"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textStyle="normal|bold" />
+            <TextView
+                android:text="D"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textStyle="normal|bold" />
+            <TextView
+                android:text="L"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textStyle="normal|bold" />
+            <TextView
+                android:text="GF"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textStyle="normal|bold" />
+            <TextView
+                android:text="GA"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textStyle="normal|bold" />
+            <TextView
+                android:text="GD"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textStyle="normal|bold" />
+            <TextView
+                android:text="PTS"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textStyle="normal|bold" />
+        </TableRow>
+    </TableLayout>
 
 </FrameLayout>

@@ -60,6 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Please select a team!!", Toast.LENGTH_SHORT).show();
                 } else {
                     LocalData.create(mSelectedTeam);
+                    LocalData.drawSchedule();
                     startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                 }
             }
