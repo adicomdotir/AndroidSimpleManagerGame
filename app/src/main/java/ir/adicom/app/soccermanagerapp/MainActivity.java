@@ -18,6 +18,7 @@ import ir.adicom.app.soccermanagerapp.views.HomeFragment;
 import ir.adicom.app.soccermanagerapp.views.LeagueFragment;
 import ir.adicom.app.soccermanagerapp.views.MatchesFragment;
 import ir.adicom.app.soccermanagerapp.views.PlayersFragment;
+import ir.adicom.app.soccermanagerapp.views.TransfersFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -106,6 +107,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_matches) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.content_main, new MatchesFragment());
+            ft.commit();
+        } else if (id == R.id.nav_transfers) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_main, new TransfersFragment());
             ft.commit();
         }
 

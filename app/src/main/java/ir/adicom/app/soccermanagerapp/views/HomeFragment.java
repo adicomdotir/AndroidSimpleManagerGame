@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import ir.adicom.app.soccermanagerapp.R;
@@ -47,9 +48,29 @@ public class HomeFragment extends Fragment {
 //        sb.append(team.getName() + "\n");
         sb.append("Overall: " + (int) overall + "\n");
         sb.append("Position: " + 1 + "\n");
-        sb.append("Players Count: " + playerCount);
+        sb.append("Players Count: " + playerCount + "\n");
+        sb.append("Week: " + LocalData.weekIndex + "\n");
+        for (int i = 0; i < LocalData.MATCHES.length; i++) {
+            if (LocalData.MATCHES[i].getWeekId() == LocalData.weekIndex) {
+                if (LocalData.MATCHES[i].getTeamHome() == 0) {
+                    sb.append("Next Opponent: " + LocalData.teams[LocalData.MATCHES[i].getTeamAway()].getName());
+                } else {
+                    if (LocalData.MATCHES[i].getTeamAway() == 0) {
+                        sb.append("Next Opponent: " + LocalData.teams[LocalData.MATCHES[i].getTeamHome()].getName());
+                    }
+                }
+            }
+        }
 
         TextView txtHome = (TextView) view.findViewById(R.id.txt_home);
         txtHome.setText(sb.toString());
+
+        Button btnGame = (Button) view.findViewById(R.id.btn_game);
+        btnGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 }
