@@ -7,10 +7,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import ir.adicom.app.soccermanagerapp.R;
+import ir.adicom.app.soccermanagerapp.adapters.PlayersAdapter;
 import ir.adicom.app.soccermanagerapp.data.LocalData;
+import ir.adicom.app.soccermanagerapp.model.Player;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,18 +40,20 @@ public class PlayersFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        List<Player> playerList = new ArrayList<>();
+
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < LocalData.players.length; i++) {
             if (LocalData.players[i].getTeamId() == 1) {
-                sb.append(LocalData.players[i].getName());
-                sb.append(" " + LocalData.players[i].getAge());
-                sb.append(" " + (int) LocalData.players[i].getScoring());
-                sb.append(" " + (int) LocalData.players[i].getGoalkeeper());
-                sb.append("\n");
+                playerList.add(LocalData.players[i]);
             }
         }
 
-        TextView txtPlayers = (TextView) view.findViewById(R.id.txt_players);
-        txtPlayers.setText(sb);
+        Player[] players = new Player[playerList.size()];
+        players = playerList.toArray(players);
+        PlayersAdapter adapter = new PlayersAdapter(getContext(), players);
+
+        ListView lvPlayers = (ListView) view.findViewById(R.id.lv_players);
+        lvPlayers.setAdapter(adapter);
     }
 }

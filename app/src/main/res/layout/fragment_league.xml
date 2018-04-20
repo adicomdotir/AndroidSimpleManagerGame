@@ -2,10 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ir.adicom.app.soccermanagerapp.views.PlayersFragment">
+    tools:context="ir.adicom.app.soccermanagerapp.views.LeagueFragment">
 
-    <ListView
+    <TextView
+        android:id="@+id/tv_test"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/lv_players" />
+        android:text="@string/hello_blank_fragment" />
+
 </FrameLayout>

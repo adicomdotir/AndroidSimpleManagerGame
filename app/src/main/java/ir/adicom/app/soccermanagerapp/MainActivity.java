@@ -16,6 +16,7 @@ import android.widget.TextView;
 import ir.adicom.app.soccermanagerapp.data.LocalData;
 import ir.adicom.app.soccermanagerapp.model.Player;
 import ir.adicom.app.soccermanagerapp.views.HomeFragment;
+import ir.adicom.app.soccermanagerapp.views.LeagueFragment;
 import ir.adicom.app.soccermanagerapp.views.PlayersFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -97,6 +98,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_players) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.content_main, new PlayersFragment());
+            ft.commit();
+        } else if (id == R.id.nav_league) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_main, new LeagueFragment());
             ft.commit();
         }
 

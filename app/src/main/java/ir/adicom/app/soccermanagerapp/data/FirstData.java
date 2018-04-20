@@ -5,7 +5,7 @@ package ir.adicom.app.soccermanagerapp.data;
  */
 
 public class FirstData {
-    public static String[] firstNames = {
+    public static final String[] FIRST_NAMES = {
             "Adam",
             "Adrian",
             "Alan",
@@ -86,7 +86,7 @@ public class FirstData {
             "William"
     };
 
-    public static String[] lastNames = {
+    public static final String[] LAST_NAMES = {
             "Abraham",
             "Allan",
             "Alsop",
@@ -238,7 +238,7 @@ public class FirstData {
             "Young"
     };
 
-    public static String[] teamNames = {
+    public static final String[] TEAM_NAMES = {
             "ManUtd",
             "ManCity",
             "Arsenal",

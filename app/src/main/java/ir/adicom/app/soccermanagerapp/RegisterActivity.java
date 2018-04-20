@@ -34,7 +34,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         mSpinnerTeams = (Spinner) findViewById(R.id.sp_teams);
         List<String> teams = new ArrayList<>();
-        teams.addAll(Arrays.asList(FirstData.teamNames));
+        Arrays.sort(FirstData.TEAM_NAMES);
+        teams.addAll(Arrays.asList(FirstData.TEAM_NAMES));
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, teams);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

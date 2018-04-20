@@ -14,7 +14,7 @@ public class GenerateOperator {
 
     public Team generateTeam(int teamId) {
         Team team = new Team();
-        String name = FirstData.teamNames[(int) (Math.random() * FirstData.teamNames.length)];
+        String name = FirstData.TEAM_NAMES[(int) (Math.random() * FirstData.TEAM_NAMES.length)];
         team.setName(name);
         team.setNickname(name.charAt(0) + "");
         System.out.println(team.getName());
@@ -25,8 +25,8 @@ public class GenerateOperator {
         Player player = new Player();
         player.setTeamId(teamId);
 //        player.setPower((float) Math.random() * 10 + 1);
-        String name = FirstData.firstNames[(int) (Math.random() * FirstData.firstNames.length)] +
-                " " + FirstData.lastNames[(int) (Math.random() * FirstData.lastNames.length)];
+        String name = FirstData.FIRST_NAMES[(int) (Math.random() * FirstData.FIRST_NAMES.length)] +
+                " " + FirstData.LAST_NAMES[(int) (Math.random() * FirstData.LAST_NAMES.length)];
         player.setName(name);
 
         return player;
