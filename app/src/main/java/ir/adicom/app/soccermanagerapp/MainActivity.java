@@ -8,7 +8,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -17,6 +16,7 @@ import ir.adicom.app.soccermanagerapp.data.LocalData;
 import ir.adicom.app.soccermanagerapp.model.Player;
 import ir.adicom.app.soccermanagerapp.views.HomeFragment;
 import ir.adicom.app.soccermanagerapp.views.LeagueFragment;
+import ir.adicom.app.soccermanagerapp.views.MatchesFragment;
 import ir.adicom.app.soccermanagerapp.views.PlayersFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -102,6 +102,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_league) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.content_main, new LeagueFragment());
+            ft.commit();
+        } else if (id == R.id.nav_matches) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_main, new MatchesFragment());
             ft.commit();
         }
 
