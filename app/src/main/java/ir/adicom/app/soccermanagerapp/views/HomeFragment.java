@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import ir.adicom.app.soccermanagerapp.R;
 import ir.adicom.app.soccermanagerapp.data.LocalData;
+import ir.adicom.app.soccermanagerapp.model.Match;
+import ir.adicom.app.soccermanagerapp.model.Team;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -85,6 +87,59 @@ public class HomeFragment extends Fragment {
     }
 
     private void gameProcess() {
+        for (Match m : LocalData.matches) {
+            if (m.getWeekId() == LocalData.weekIndex) {
+                int goalHome = (int) Math.floor(Math.random() * 5);
+                int goalAway = (int) Math.floor(Math.random() * 5);
+                m.setGoalTeamHome(goalHome);
+                m.setGoalTeamAway(goalAway);
+                updateTeamInfo(m);
+            }
+        }
+    }
 
+    private void updateTeamInfo(Match match) {
+        Team teamHome = LocalData.teams[match.getTeamHome()];
+        Team teamAway = LocalData.teams[match.getTeamAway()];
+        if (match.getGoalTeamHome() > match.getGoalTeamAway()) {
+            // Home Team
+            teamHome.setGame(teamHome.getGame() + 1);
+            teamHome.setWin(teamHome.getWin() + 1);
+            teamHome.setGa(teamHome.getGa() + match.getGoalTeamAway());
+            teamHome.setGf(teamHome.getGf() + match.getGoalTeamHome());
+            teamHome.setPts(teamHome.getPts() + 3);
+
+            // Away Team
+            teamAway.setGame(teamAway.getGame() + 1);
+            teamAway.setLose(teamAway.getLose() + 1);
+            teamAway.setGa(teamAway.getGa() + match.getGoalTeamHome());
+            teamAway.setGf(teamAway.getGf() + match.getGoalTeamAway());
+        } else if (match.getGoalTeamHome() < match.getGoalTeamAway()) {
+            // Away Team
+            teamAway.setGame(teamAway.getGame() + 1);
+            teamAway.setWin(teamAway.getWin() + 1);
+            teamAway.setGa(teamAway.getGa() + match.getGoalTeamHome());
+            teamAway.setGf(teamAway.getGf() + match.getGoalTeamAway());
+            teamAway.setPts(teamAway.getPts() + 3);
+
+            // Home Team
+            teamHome.setGame(teamHome.getGame() + 1);
+            teamHome.setLose(teamHome.getLose() + 1);
+            teamHome.setGa(teamHome.getGa() + match.getGoalTeamAway());
+            teamHome.setGf(teamHome.getGf() + match.getGoalTeamHome());
+        } else {
+            // Home Team
+            teamHome.setGame(teamHome.getGame() + 1);
+            teamHome.setDraw(teamHome.getDraw() + 1);
+            teamHome.setGa(teamHome.getGa() + match.getGoalTeamAway());
+            teamHome.setGf(teamHome.getGf() + match.getGoalTeamHome());
+            teamHome.setPts(teamHome.getPts() + 1);
+            // Away Team
+            teamAway.setGame(teamAway.getGame() + 1);
+            teamAway.setDraw(teamAway.getDraw() + 1);
+            teamAway.setGa(teamAway.getGa() + match.getGoalTeamHome());
+            teamAway.setGf(teamAway.getGf() + match.getGoalTeamAway());
+            teamAway.setPts(teamAway.getPts() + 1);
+        }
     }
 }

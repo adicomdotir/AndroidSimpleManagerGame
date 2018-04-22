@@ -46,7 +46,7 @@ public class MatchesFragment extends Fragment {
                 if (m.getGoalTeamHome() != -1 && m.getGoalTeamAway() != -1) {
                     sb.append(" " + m.getGoalTeamHome());
                     sb.append("-");
-                    sb.append(" " + m.getGoalTeamAway());
+                    sb.append(m.getGoalTeamAway() + " ");
                 } else {
                     sb.append(" x-x ");
                 }
@@ -56,7 +56,7 @@ public class MatchesFragment extends Fragment {
                 if (m.getGoalTeamHome() != -1 && m.getGoalTeamAway() != -1) {
                     sb.append(" " + m.getGoalTeamHome());
                     sb.append("-");
-                    sb.append(" " + m.getGoalTeamAway());
+                    sb.append(m.getGoalTeamAway() + " ");
                 } else {
                     sb.append(" x-x ");
                 }
