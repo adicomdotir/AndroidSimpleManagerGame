@@ -44,7 +44,7 @@ public class LeagueFragment extends Fragment {
         }
 
         TableLayout tableLayout = (TableLayout) view.findViewById(R.id.table);
-        for (int i = 0; i < LocalData.SIZE; i++) {
+        for (int i = 0; i < LocalData.size; i++) {
             TableRow row = new TableRow(view.getContext());
 
             TextView tv = new TextView(view.getContext());

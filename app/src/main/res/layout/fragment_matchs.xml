@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     tools:context="ir.adicom.app.soccermanagerapp.views.MatchesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:textColor="#000000"
         android:gravity="center"

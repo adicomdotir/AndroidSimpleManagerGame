@@ -59,8 +59,10 @@ public class RegisterActivity extends AppCompatActivity {
                 if (mSelectedTeam == null || mSelectedTeam.length() == 0) {
                     Toast.makeText(RegisterActivity.this, "Please select a team!!", Toast.LENGTH_SHORT).show();
                 } else {
+                    LocalData.init();
                     LocalData.create(mSelectedTeam);
                     LocalData.drawSchedule();
+                    finish();
                     startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                 }
             }

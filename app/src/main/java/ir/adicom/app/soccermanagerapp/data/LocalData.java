@@ -9,27 +9,45 @@ import ir.adicom.app.soccermanagerapp.model.Team;
  */
 
 public class LocalData {
-    public static int weekIndex = 1;
-    public static final int SIZE = 4;
-    public static final int PLAYER_SIZE = 10;
-    public static Team[] teams = new Team[SIZE];
-    public static Player[] players = new Player[SIZE * PLAYER_SIZE];
-    public static final Match[] MATCHES = new Match[SIZE * (SIZE - 1)];
+    public static int weekIndex;
+    public static int size;
+    public static int playerSize;
+    public static Team[] teams;
+    public static Player[] players;
+    public static  Match[] matches;
 
+    public static void init() {
+        weekIndex = 1;
+        size = 4;
+        playerSize = 10;
+        teams = new Team[size];
+        players = new Player[size * playerSize];
+        matches = new Match[size * (size - 1)];
+    }
 
     public static void create(String team) {
         teams[0] = new Team(1, team, "nothing", 0);
 
-        for (int i = 1; i < SIZE; i++) {
+        for (int i = 1; i < size; i++) {
             int n = (int) (Math.random() * FirstData.TEAM_NAMES.length);
             String teamName = FirstData.TEAM_NAMES[n];
-            teams[i] = new Team(i + 1, teamName, "nothing", 0);
+            boolean exist = false;
+            for (Team t : teams) {
+                if (t != null && t.getName().equals(teamName)) {
+                    exist = true;
+                }
+            }
+            if (!exist) {
+                teams[i] = new Team(i + 1, teamName, "nothing", 0);
+            } else {
+                i--;
+            }
         }
 
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < PLAYER_SIZE; j++) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < playerSize; j++) {
                 Player player = new Player();
-                player.setId(i * PLAYER_SIZE + j + 1);
+                player.setId(i * playerSize + j + 1);
                 player.setTeamId(i + 1);
                 int n = (int) (Math.random() * FirstData.FIRST_NAMES.length);
                 String fullName = FirstData.FIRST_NAMES[n];
@@ -39,29 +57,29 @@ public class LocalData {
                 player.setAge((int) (Math.random() * 17 + 17));
                 player.setGoalkeeper((float) (Math.random() * 20) + 1);
                 player.setScoring((float) (Math.random() * 20) + 1);
-                players[i * PLAYER_SIZE + j] = player;
+                players[i * playerSize + j] = player;
             }
         }
     }
 
     public static void drawSchedule() {
-        int[] schedule = new int[SIZE];
+        int[] schedule = new int[size];
         for (int i = 0; i < schedule.length; i++) {
             schedule[i] = i;
         }
-        for (int i = 0; i < LocalData.SIZE * 2 - 2; i++) {
-            for (int j = 0; j < LocalData.SIZE / 2; j++) {
-                MATCHES[(i * (LocalData.SIZE / 2)) + j] = new Match();
-                MATCHES[(i * (LocalData.SIZE / 2)) + j].setId((i * (LocalData.SIZE / 2)) + j + 1);
-                MATCHES[(i * (LocalData.SIZE / 2)) + j].setWeekId(i + 1);
-                MATCHES[(i * (LocalData.SIZE / 2)) + j].setGoalTeamHome(-1);
-                MATCHES[(i * (LocalData.SIZE / 2)) + j].setGoalTeamAway(-1);
-                if (i < LocalData.SIZE - 1) {
-                    MATCHES[(i * (LocalData.SIZE / 2)) + j].setTeamAway(schedule[LocalData.SIZE - 1 - j]);
-                    MATCHES[(i * (LocalData.SIZE / 2)) + j].setTeamHome(schedule[j]);
+        for (int i = 0; i < LocalData.size * 2 - 2; i++) {
+            for (int j = 0; j < LocalData.size / 2; j++) {
+                matches[(i * (LocalData.size / 2)) + j] = new Match();
+                matches[(i * (LocalData.size / 2)) + j].setId((i * (LocalData.size / 2)) + j + 1);
+                matches[(i * (LocalData.size / 2)) + j].setWeekId(i + 1);
+                matches[(i * (LocalData.size / 2)) + j].setGoalTeamHome(-1);
+                matches[(i * (LocalData.size / 2)) + j].setGoalTeamAway(-1);
+                if (i < LocalData.size - 1) {
+                    matches[(i * (LocalData.size / 2)) + j].setTeamAway(schedule[LocalData.size - 1 - j]);
+                    matches[(i * (LocalData.size / 2)) + j].setTeamHome(schedule[j]);
                 } else {
-                    MATCHES[(i * (LocalData.SIZE / 2)) + j].setTeamHome(schedule[LocalData.SIZE - 1 - j]);
-                    MATCHES[(i * (LocalData.SIZE / 2)) + j].setTeamAway(schedule[j]);
+                    matches[(i * (LocalData.size / 2)) + j].setTeamHome(schedule[LocalData.size - 1 - j]);
+                    matches[(i * (LocalData.size / 2)) + j].setTeamAway(schedule[j]);
                 }
             }
             int temp = -1;

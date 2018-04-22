@@ -3,6 +3,7 @@ package ir.adicom.app.soccermanagerapp.views;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,7 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         float overall = 0;
@@ -49,28 +50,41 @@ public class HomeFragment extends Fragment {
         sb.append("Overall: " + (int) overall + "\n");
         sb.append("Position: " + 1 + "\n");
         sb.append("Players Count: " + playerCount + "\n");
-        sb.append("Week: " + LocalData.weekIndex + "\n");
-        for (int i = 0; i < LocalData.MATCHES.length; i++) {
-            if (LocalData.MATCHES[i].getWeekId() == LocalData.weekIndex) {
-                if (LocalData.MATCHES[i].getTeamHome() == 0) {
-                    sb.append("Next Opponent: " + LocalData.teams[LocalData.MATCHES[i].getTeamAway()].getName());
+        sb.append("Week: " + (LocalData.weekIndex > LocalData.size * 2 - 2 ? "End" : LocalData.weekIndex) + "\n");
+        for (int i = 0; i < LocalData.matches.length; i++) {
+            if (LocalData.matches[i].getWeekId() == LocalData.weekIndex) {
+                if (LocalData.matches[i].getTeamHome() == 0) {
+                    sb.append("Next Opponent: " + LocalData.teams[LocalData.matches[i].getTeamAway()].getName());
                 } else {
-                    if (LocalData.MATCHES[i].getTeamAway() == 0) {
-                        sb.append("Next Opponent: " + LocalData.teams[LocalData.MATCHES[i].getTeamHome()].getName());
+                    if (LocalData.matches[i].getTeamAway() == 0) {
+                        sb.append("Next Opponent: " + LocalData.teams[LocalData.matches[i].getTeamHome()].getName());
                     }
                 }
             }
         }
 
-        TextView txtHome = (TextView) view.findViewById(R.id.txt_home);
+        final TextView txtHome = (TextView) view.findViewById(R.id.txt_home);
         txtHome.setText(sb.toString());
 
-        Button btnGame = (Button) view.findViewById(R.id.btn_game);
+        final Button btnGame = (Button) view.findViewById(R.id.btn_game);
+        if (LocalData.weekIndex > LocalData.size * 2 - 2) {
+            btnGame.setEnabled(false);
+        }
+        final Fragment fragment = this;
         btnGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (LocalData.weekIndex <= LocalData.size * 2 - 2) {
+                    gameProcess();
+                    LocalData.weekIndex++;
+                    FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    ft.detach(fragment).attach(fragment).commit();
+                }
             }
         });
+    }
+
+    private void gameProcess() {
+
     }
 }

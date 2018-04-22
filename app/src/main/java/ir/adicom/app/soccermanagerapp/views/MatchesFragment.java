@@ -38,7 +38,7 @@ public class MatchesFragment extends Fragment {
         TextView tvMatches = (TextView) view.findViewById(R.id.tv_matches);
         StringBuilder sb = new StringBuilder();
         float week = 2;
-        for (Match m : LocalData.MATCHES) {
+        for (Match m : LocalData.matches) {
             if (week % 2 == 0) {
                 sb.append("Week " + (int)(week / 2));
                 sb.append("\n");
