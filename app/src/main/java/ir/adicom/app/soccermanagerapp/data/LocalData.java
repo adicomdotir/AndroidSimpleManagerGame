@@ -45,20 +45,27 @@ public class LocalData {
         }
 
         for (int i = 0; i < size; i++) {
+            int overall = 0;
             for (int j = 0; j < playerSize; j++) {
                 Player player = new Player();
                 player.setId(i * playerSize + j + 1);
                 player.setTeamId(i + 1);
+
+                // Generate FULLNAME contain one FIRSTNAME and one LASTNAME
                 int n = (int) (Math.random() * FirstData.FIRST_NAMES.length);
                 String fullName = FirstData.FIRST_NAMES[n];
                 n = (int) (Math.random() * FirstData.LAST_NAMES.length);
                 fullName += " " + FirstData.LAST_NAMES[n];
+
                 player.setName(fullName);
                 player.setAge((int) (Math.random() * 17 + 17));
                 player.setGoalkeeper((float) (Math.random() * 20) + 1);
                 player.setScoring((float) (Math.random() * 20) + 1);
                 players[i * playerSize + j] = player;
+
+                overall += (player.getGoalkeeper() + player.getScoring()) / 2;
             }
+            teams[i].setOverral(overall / playerSize);
         }
     }
 

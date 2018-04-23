@@ -37,19 +37,16 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        float overall = 0;
         int playerCount = 0;
 
         for (int i = 0; i < LocalData.players.length; i++) {
             if (LocalData.players[i].getTeamId() == 1) {
                 playerCount++;
-                overall += LocalData.players[i].getScoring() + LocalData.players[i].getGoalkeeper();
             }
         }
-        overall /= 4;
         StringBuilder sb = new StringBuilder();
 //        sb.append(team.getName() + "\n");
-        sb.append("Overall: " + (int) overall + "\n");
+        sb.append("Overall: " + LocalData.teams[0].getOverral() + "\n");
         sb.append("Position: " + 1 + "\n");
         sb.append("Players Count: " + playerCount + "\n");
         sb.append("Week: " + (LocalData.weekIndex > LocalData.size * 2 - 2 ? "End" : LocalData.weekIndex) + "\n");
@@ -89,10 +86,46 @@ public class HomeFragment extends Fragment {
     private void gameProcess() {
         for (Match m : LocalData.matches) {
             if (m.getWeekId() == LocalData.weekIndex) {
-                int goalHome = (int) Math.floor(Math.random() * 5);
-                int goalAway = (int) Math.floor(Math.random() * 5);
-                m.setGoalTeamHome(goalHome);
-                m.setGoalTeamAway(goalAway);
+                int homePercent = (int) (LocalData.teams[m.getTeamHome()].getOverral() * 2.5);
+                int awayPercent = (int) (LocalData.teams[m.getTeamAway()].getOverral() * 2.5);
+//                int drawPercent = 100 - homePercent - awayPercent;
+                int random = (int) Math.floor(Math.random() * 100);
+                if (random <= homePercent) {
+                    // Home winner
+                    if (awayPercent < homePercent) {
+                        int goalHome = (int) Math.floor(Math.random() * 1) + 2;
+                        int goalAway = (int) Math.floor(Math.random() * 1);
+                        m.setGoalTeamHome(goalHome);
+                        m.setGoalTeamAway(goalAway);
+                    } else {
+                        int goalHome = 1;
+                        int goalAway = 0;
+                        m.setGoalTeamHome(goalHome);
+                        m.setGoalTeamAway(goalAway);
+                    }
+                } else if (random > homePercent && random <= awayPercent) {
+                    // Away winner
+                    if (awayPercent > homePercent) {
+                        int goalHome = (int) Math.floor(Math.random() * 1);
+                        int goalAway = (int) Math.floor(Math.random() * 1) + 2;
+                        m.setGoalTeamHome(goalHome);
+                        m.setGoalTeamAway(goalAway);
+                    } else {
+                        int goalHome = 0;
+                        int goalAway = 1;
+                        m.setGoalTeamHome(goalHome);
+                        m.setGoalTeamAway(goalAway);
+                    }
+                } else if (random > awayPercent) {
+                    // Draw
+                    int goal = (int) Math.floor(Math.random() * 3);
+                    m.setGoalTeamHome(goal);
+                    m.setGoalTeamAway(goal);
+                }
+//                int goalHome = (int) Math.floor(Math.random() * 5);
+//                int goalAway = (int) Math.floor(Math.random() * 5);
+//                m.setGoalTeamHome(goalHome);
+//                m.setGoalTeamAway(goalAway);
                 updateTeamInfo(m);
             }
         }
@@ -108,7 +141,6 @@ public class HomeFragment extends Fragment {
             teamHome.setGa(teamHome.getGa() + match.getGoalTeamAway());
             teamHome.setGf(teamHome.getGf() + match.getGoalTeamHome());
             teamHome.setPts(teamHome.getPts() + 3);
-
             // Away Team
             teamAway.setGame(teamAway.getGame() + 1);
             teamAway.setLose(teamAway.getLose() + 1);
@@ -121,7 +153,6 @@ public class HomeFragment extends Fragment {
             teamAway.setGa(teamAway.getGa() + match.getGoalTeamHome());
             teamAway.setGf(teamAway.getGf() + match.getGoalTeamAway());
             teamAway.setPts(teamAway.getPts() + 3);
-
             // Home Team
             teamHome.setGame(teamHome.getGame() + 1);
             teamHome.setLose(teamHome.getLose() + 1);
