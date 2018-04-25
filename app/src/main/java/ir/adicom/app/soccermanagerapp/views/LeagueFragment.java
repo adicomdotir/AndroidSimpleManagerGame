@@ -38,10 +38,8 @@ public class LeagueFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        StringBuilder sb = new StringBuilder();
-        for (Team team : LocalData.teams) {
-            sb.append(team.getName() + ", " + team.getOverral() + "\n");
-        }
+        Team[] teams = LocalData.teams.clone();
+        sort(teams);
 
         TableLayout tableLayout = (TableLayout) view.findViewById(R.id.table);
         for (int i = 0; i < LocalData.size; i++) {
@@ -50,59 +48,98 @@ public class LeagueFragment extends Fragment {
             TextView tv = new TextView(view.getContext());
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-            tv.setText(LocalData.teams[i].getName());
+            tv.setText(teams[i].getName());
             row.addView(tv);
 
             tv = new TextView(view.getContext());
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-            tv.setText("" + LocalData.teams[i].getGame());
+            tv.setText("" + teams[i].getGame());
             row.addView(tv);
 
             tv = new TextView(view.getContext());
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-            tv.setText("" + LocalData.teams[i].getWin());
+            tv.setText("" + teams[i].getWin());
             row.addView(tv);
 
             tv = new TextView(view.getContext());
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-            tv.setText("" + LocalData.teams[i].getDraw());
+            tv.setText("" + teams[i].getDraw());
             row.addView(tv);
 
             tv = new TextView(view.getContext());
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-            tv.setText("" + LocalData.teams[i].getLose());
+            tv.setText("" + teams[i].getLose());
             row.addView(tv);
 
             tv = new TextView(view.getContext());
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-            tv.setText("" + LocalData.teams[i].getGf());
+            tv.setText("" + teams[i].getGf());
             row.addView(tv);
 
             tv = new TextView(view.getContext());
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-            tv.setText("" + LocalData.teams[i].getGa());
+            tv.setText("" + teams[i].getGa());
             row.addView(tv);
 
             tv = new TextView(view.getContext());
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-            tv.setText("" + (LocalData.teams[i].getGf() - LocalData.teams[i].getGa()));
+            tv.setText("" + (teams[i].getGf() - teams[i].getGa()));
             row.addView(tv);
 
             tv = new TextView(view.getContext());
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-            tv.setText("" + LocalData.teams[i].getPts());
+            tv.setText("" + teams[i].getPts());
             row.addView(tv);
 
             tableLayout.addView(row);
         }
 
+    }
+
+    private void sort(Team[] teams) {
+        // For points
+        for (int i = 0; i < teams.length; i++) {
+            for (int j = i + 1; j < teams.length; j++) {
+                if (teams[i].getPts() < teams[j].getPts()) {
+                    Team temp = teams[i];
+                    teams[i] = teams[j];
+                    teams[j] = temp;
+                }
+            }
+        }
+        // For goal differance
+        for (int i = 0; i < teams.length; i++) {
+            for (int j = i + 1; j < teams.length; j++) {
+                if (teams[i].getPts() == teams[j].getPts()) {
+                    if (teams[i].getGf() - teams[i].getGa() < teams[j].getGf() - teams[j].getGa()) {
+                        Team temp = teams[i];
+                        teams[i] = teams[j];
+                        teams[j] = temp;
+                    }
+                }
+            }
+        }
+        // For goal forward
+        for (int i = 0; i < teams.length; i++) {
+            for (int j = i + 1; j < teams.length; j++) {
+                if (teams[i].getPts() == teams[j].getPts()) {
+                    if (teams[i].getGf() - teams[i].getGa() == teams[j].getGf() - teams[j].getGa()) {
+                        if (teams[i].getGf() < teams[j].getGf()) {
+                            Team temp = teams[i];
+                            teams[i] = teams[j];
+                            teams[j] = temp;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -18,7 +18,7 @@ public class LocalData {
 
     public static void init() {
         weekIndex = 1;
-        size = 4;
+        size = 8;
         playerSize = 10;
         teams = new Team[size];
         players = new Player[size * playerSize];

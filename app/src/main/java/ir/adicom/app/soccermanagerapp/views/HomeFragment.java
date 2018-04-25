@@ -92,29 +92,51 @@ public class HomeFragment extends Fragment {
                 int random = (int) Math.floor(Math.random() * 100);
                 if (random <= homePercent) {
                     // Home winner
-                    if (awayPercent < homePercent) {
-                        int goalHome = (int) Math.floor(Math.random() * 1) + 2;
-                        int goalAway = (int) Math.floor(Math.random() * 1);
-                        m.setGoalTeamHome(goalHome);
+                    int diff = homePercent - awayPercent;
+                    if (diff < 5) {
+                        int goalAway = (int) Math.floor(Math.random() * 3);
+                        m.setGoalTeamHome(goalAway + 1);
                         m.setGoalTeamAway(goalAway);
-                    } else {
-                        int goalHome = 1;
-                        int goalAway = 0;
-                        m.setGoalTeamHome(goalHome);
+                    } else if (diff < 10 && diff >= 5) {
+                        int goalAway = (int) Math.floor(Math.random() * 3);
+                        m.setGoalTeamHome(goalAway + 2);
+                        m.setGoalTeamAway(goalAway);
+                    } else if (diff < 15 && diff >= 10) {
+                        int goalAway = (int) Math.floor(Math.random() * 3);
+                        m.setGoalTeamHome(goalAway + 3);
+                        m.setGoalTeamAway(goalAway);
+                    } else if (diff < 20 && diff >= 15) {
+                        int goalAway = (int) Math.floor(Math.random() * 3);
+                        m.setGoalTeamHome(goalAway + 4);
+                        m.setGoalTeamAway(goalAway);
+                    } else if (diff >= 20) {
+                        int goalAway = (int) Math.floor(Math.random() * 3);
+                        m.setGoalTeamHome(goalAway + 5);
                         m.setGoalTeamAway(goalAway);
                     }
                 } else if (random > homePercent && random <= awayPercent) {
                     // Away winner
-                    if (awayPercent > homePercent) {
-                        int goalHome = (int) Math.floor(Math.random() * 1);
-                        int goalAway = (int) Math.floor(Math.random() * 1) + 2;
-                        m.setGoalTeamHome(goalHome);
-                        m.setGoalTeamAway(goalAway);
-                    } else {
-                        int goalHome = 0;
-                        int goalAway = 1;
-                        m.setGoalTeamHome(goalHome);
-                        m.setGoalTeamAway(goalAway);
+                    int diff = awayPercent - homePercent;
+                    if (diff < 5) {
+                        int goalAway = (int) Math.floor(Math.random() * 3);
+                        m.setGoalTeamHome(goalAway);
+                        m.setGoalTeamAway(goalAway + 1);
+                    } else if (diff < 10 && diff >= 5) {
+                        int goalAway = (int) Math.floor(Math.random() * 3);
+                        m.setGoalTeamHome(goalAway);
+                        m.setGoalTeamAway(goalAway + 2);
+                    } else if (diff < 15 && diff >= 10) {
+                        int goalAway = (int) Math.floor(Math.random() * 3);
+                        m.setGoalTeamHome(goalAway);
+                        m.setGoalTeamAway(goalAway + 3);
+                    } else if (diff < 20 && diff >= 15) {
+                        int goalAway = (int) Math.floor(Math.random() * 3);
+                        m.setGoalTeamHome(goalAway);
+                        m.setGoalTeamAway(goalAway + 4);
+                    } else if (diff >= 20) {
+                        int goalAway = (int) Math.floor(Math.random() * 3);
+                        m.setGoalTeamHome(goalAway);
+                        m.setGoalTeamAway(goalAway + 5);
                     }
                 } else if (random > awayPercent) {
                     // Draw
@@ -122,10 +144,6 @@ public class HomeFragment extends Fragment {
                     m.setGoalTeamHome(goal);
                     m.setGoalTeamAway(goal);
                 }
-//                int goalHome = (int) Math.floor(Math.random() * 5);
-//                int goalAway = (int) Math.floor(Math.random() * 5);
-//                m.setGoalTeamHome(goalHome);
-//                m.setGoalTeamAway(goalAway);
                 updateTeamInfo(m);
             }
         }

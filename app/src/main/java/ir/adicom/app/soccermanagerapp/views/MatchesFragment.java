@@ -1,6 +1,5 @@
 package ir.adicom.app.soccermanagerapp.views;
 
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,11 +17,9 @@ import ir.adicom.app.soccermanagerapp.model.Match;
  */
 public class MatchesFragment extends Fragment {
 
-
     public MatchesFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,10 +34,11 @@ public class MatchesFragment extends Fragment {
 
         TextView tvMatches = (TextView) view.findViewById(R.id.tv_matches);
         StringBuilder sb = new StringBuilder();
-        float week = 2;
+        int len = LocalData.size / 2;
+        float week = len;
         for (Match m : LocalData.matches) {
-            if (week % 2 == 0) {
-                sb.append("Week " + (int)(week / 2));
+            if (week % len == 0) {
+                sb.append("Week " + (int)(week / len));
                 sb.append("\n");
                 sb.append(LocalData.teams[m.getTeamHome()].getName());
                 if (m.getGoalTeamHome() != -1 && m.getGoalTeamAway() != -1) {
