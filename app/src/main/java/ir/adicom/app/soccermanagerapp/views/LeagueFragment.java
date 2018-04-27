@@ -1,6 +1,6 @@
 package ir.adicom.app.soccermanagerapp.views;
 
-
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -26,10 +26,8 @@ public class LeagueFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_league, container, false);
     }
@@ -46,54 +44,63 @@ public class LeagueFragment extends Fragment {
             TableRow row = new TableRow(view.getContext());
 
             TextView tv = new TextView(view.getContext());
+            textViewSetColor(tv, i);
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
             tv.setText(teams[i].getName());
             row.addView(tv);
 
             tv = new TextView(view.getContext());
+            textViewSetColor(tv, i);
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
             tv.setText("" + teams[i].getGame());
             row.addView(tv);
 
             tv = new TextView(view.getContext());
+            textViewSetColor(tv, i);
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
             tv.setText("" + teams[i].getWin());
             row.addView(tv);
 
             tv = new TextView(view.getContext());
+            textViewSetColor(tv, i);
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
             tv.setText("" + teams[i].getDraw());
             row.addView(tv);
 
             tv = new TextView(view.getContext());
+            textViewSetColor(tv, i);
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
             tv.setText("" + teams[i].getLose());
             row.addView(tv);
 
             tv = new TextView(view.getContext());
+            textViewSetColor(tv, i);
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
             tv.setText("" + teams[i].getGf());
             row.addView(tv);
 
             tv = new TextView(view.getContext());
+            textViewSetColor(tv, i);
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
             tv.setText("" + teams[i].getGa());
             row.addView(tv);
 
             tv = new TextView(view.getContext());
+            textViewSetColor(tv, i);
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
             tv.setText("" + (teams[i].getGf() - teams[i].getGa()));
             row.addView(tv);
 
             tv = new TextView(view.getContext());
+            textViewSetColor(tv, i);
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
             tv.setText("" + teams[i].getPts());
@@ -102,6 +109,18 @@ public class LeagueFragment extends Fragment {
             tableLayout.addView(row);
         }
 
+    }
+
+    private void textViewSetColor(TextView tv, int index) {
+        if (index == 0) {
+            tv.setTextColor(Color.parseColor("#22AA22"));
+        } else if (index == LocalData.size - 1 || index == LocalData.size - 2) {
+            tv.setTextColor(Color.RED);
+        } else if (index == LocalData.size - 3 || index == LocalData.size - 4) {
+            tv.setTextColor(Color.parseColor("#FF9900"));
+        } else {
+            tv.setTextColor(Color.BLACK);
+        }
     }
 
     private void sort(Team[] teams) {
