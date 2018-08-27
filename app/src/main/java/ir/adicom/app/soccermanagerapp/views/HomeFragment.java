@@ -101,9 +101,9 @@ public class HomeFragment extends Fragment {
     }
 
     private void gameProcess() {
+        Random gRandom = new Random(System.currentTimeMillis());
         for (Match m : LocalData.matches) {
             if (m.getWeekId() == LocalData.weekIndex) {
-                Random gRandom = new Random(System.currentTimeMillis());
                 int homePercent = (int) (LocalData.teams[m.getTeamHome()].getOverral() * 2.5);
                 int awayPercent = (int) (LocalData.teams[m.getTeamAway()].getOverral() * 2.5);
 //                int drawPercent = 100 - homePercent - awayPercent;
