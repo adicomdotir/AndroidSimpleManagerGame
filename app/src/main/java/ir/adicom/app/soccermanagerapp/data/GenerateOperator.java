@@ -14,10 +14,10 @@ public class GenerateOperator {
 
     public Team generateTeam(int teamId) {
         Team team = new Team();
-        String name = FirstData.TEAM_NAMES[(int) (Math.random() * FirstData.TEAM_NAMES.length)];
+        int tnf = (int) (Math.random() * FirstData.TEAM_NAMES_FIRST.length);
+        int tns = (int) (Math.random() * FirstData.TEAM_NAMES_SECOND.length);
+        String name = FirstData.TEAM_NAMES_FIRST[tnf] + " " + FirstData.TEAM_NAMES_SECOND[tns];
         team.setName(name);
-        team.setNickname(name.charAt(0) + "");
-        System.out.println(team.getName());
         return team;
     }
 

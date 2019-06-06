@@ -49,17 +49,17 @@ public class HomeFragment extends Fragment {
         int previousWeek = LocalData.weekIndex - 1;
         StringBuilder sb = new StringBuilder();
 //        sb.append(team.getName() + "\n");
-        sb.append("Overall: " + LocalData.teams[0].getOverral() + "\n");
-        sb.append("Position: " + 1 + "\n");
-        sb.append("Players Count: " + playerCount + "\n");
-        sb.append("Week: " + (LocalData.weekIndex > LocalData.size * 2 - 2 ? "End" : LocalData.weekIndex) + "\n");
+        sb.append("قدرت: " + LocalData.teams[0].getOverral() + "\n");
+        sb.append("رتبه تیم: " + 1 + "\n");
+        sb.append("تعداد بازیکنان: " + playerCount + "\n");
+        sb.append("هفته: " + (LocalData.weekIndex > LocalData.size * 2 - 2 ? "تمام" : LocalData.weekIndex) + "\n");
         for (int i = 0; i < LocalData.matches.length; i++) {
             if (LocalData.matches[i].getWeekId() == LocalData.weekIndex) {
                 if (LocalData.matches[i].getTeamHome() == 0) {
-                    sb.append("Next Opponent: " + LocalData.teams[LocalData.matches[i].getTeamAway()].getName());
+                    sb.append("حریف بعدی: " + LocalData.teams[LocalData.matches[i].getTeamAway()].getName());
                 } else {
                     if (LocalData.matches[i].getTeamAway() == 0) {
-                        sb.append("Next Opponent: " + LocalData.teams[LocalData.matches[i].getTeamHome()].getName());
+                        sb.append("حریف بعدی: " + LocalData.teams[LocalData.matches[i].getTeamHome()].getName());
                     }
                 }
                 if (previousWeek >= 1 && LocalData.matches[i].getWeekId() == previousWeek) {
@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
         for (int i = 0; i < LocalData.matches.length; i++) {
             if (LocalData.matches[i].getWeekId() == previousWeek) {
                 if (LocalData.matches[i].getTeamHome() == 0 || LocalData.matches[i].getTeamAway() == 0) {
-                    sb.append("\nLast Game : " + LocalData.teams[LocalData.matches[i].getTeamHome()].getName() + " " +
+                    sb.append("\nبازی گذشته : " + LocalData.teams[LocalData.matches[i].getTeamHome()].getName() + " " +
                             LocalData.matches[i].getGoalTeamHome() + "-" + LocalData.matches[i].getGoalTeamAway() + " " +
                             LocalData.teams[LocalData.matches[i].getTeamAway()].getName());
                 }

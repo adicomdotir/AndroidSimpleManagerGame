@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:ignore="MissingPrefix"
     tools:context="ir.adicom.app.soccermanagerapp.views.LeagueFragment">
 
     <TableLayout
@@ -13,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
-                android:text="Name"
+                android:text="تیم"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -21,7 +22,16 @@
                 android:textStyle="normal|bold"
                 android:textColor="@android:color/black" />
             <TextView
-                android:text="G"
+                android:text="بازی"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textStyle="normal|bold"
+                fontPath="fonts/IRANSansMobile(FaNum).ttf"
+                android:textColor="@android:color/black"/>
+            <TextView
+                android:text="برد"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -29,7 +39,7 @@
                 android:textStyle="normal|bold"
                 android:textColor="@android:color/black" />
             <TextView
-                android:text="W"
+                android:text="مساوی"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -37,7 +47,7 @@
                 android:textStyle="normal|bold"
                 android:textColor="@android:color/black" />
             <TextView
-                android:text="D"
+                android:text="باخت"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -45,7 +55,7 @@
                 android:textStyle="normal|bold"
                 android:textColor="@android:color/black" />
             <TextView
-                android:text="L"
+                android:text="زده"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -53,7 +63,7 @@
                 android:textStyle="normal|bold"
                 android:textColor="@android:color/black" />
             <TextView
-                android:text="GF"
+                android:text="خورده"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -61,7 +71,7 @@
                 android:textStyle="normal|bold"
                 android:textColor="@android:color/black" />
             <TextView
-                android:text="GA"
+                android:text="تفاضل"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -69,15 +79,7 @@
                 android:textStyle="normal|bold"
                 android:textColor="@android:color/black" />
             <TextView
-                android:text="GD"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:textStyle="normal|bold"
-                android:textColor="@android:color/black" />
-            <TextView
-                android:text="PTS"
+                android:text="امتیاز"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"

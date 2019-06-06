@@ -38,7 +38,8 @@ public class MatchesFragment extends Fragment {
         float week = len;
         for (Match m : LocalData.matches) {
             if (week % len == 0) {
-                sb.append("Week " + (int)(week / len));
+                sb.append("\n");
+                sb.append("هفته " + (int)(week / len));
                 sb.append("\n");
                 sb.append(LocalData.teams[m.getTeamHome()].getName());
                 if (m.getGoalTeamHome() != -1 && m.getGoalTeamAway() != -1) {

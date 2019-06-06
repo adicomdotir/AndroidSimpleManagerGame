@@ -1,6 +1,7 @@
 package ir.adicom.app.soccermanagerapp.views;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -42,12 +43,14 @@ public class LeagueFragment extends Fragment {
         TableLayout tableLayout = (TableLayout) view.findViewById(R.id.table);
         for (int i = 0; i < LocalData.size; i++) {
             TableRow row = new TableRow(view.getContext());
+            Typeface tf = Typeface.createFromAsset(getActivity().getAssets(),"fonts/IRANSansMobile(FaNum).ttf");
 
             TextView tv = new TextView(view.getContext());
             textViewSetColor(tv, i);
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
             tv.setText(teams[i].getName());
+            tv.setTypeface(tf);
             row.addView(tv);
 
             tv = new TextView(view.getContext());
@@ -55,6 +58,7 @@ public class LeagueFragment extends Fragment {
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
             tv.setText("" + teams[i].getGame());
+            tv.setTypeface(tf);
             row.addView(tv);
 
             tv = new TextView(view.getContext());
@@ -62,6 +66,7 @@ public class LeagueFragment extends Fragment {
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
             tv.setText("" + teams[i].getWin());
+            tv.setTypeface(tf);
             row.addView(tv);
 
             tv = new TextView(view.getContext());
@@ -69,6 +74,7 @@ public class LeagueFragment extends Fragment {
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
             tv.setText("" + teams[i].getDraw());
+            tv.setTypeface(tf);
             row.addView(tv);
 
             tv = new TextView(view.getContext());
@@ -76,6 +82,7 @@ public class LeagueFragment extends Fragment {
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
             tv.setText("" + teams[i].getLose());
+            tv.setTypeface(tf);
             row.addView(tv);
 
             tv = new TextView(view.getContext());
@@ -83,6 +90,7 @@ public class LeagueFragment extends Fragment {
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
             tv.setText("" + teams[i].getGf());
+            tv.setTypeface(tf);
             row.addView(tv);
 
             tv = new TextView(view.getContext());
@@ -90,6 +98,7 @@ public class LeagueFragment extends Fragment {
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
             tv.setText("" + teams[i].getGa());
+            tv.setTypeface(tf);
             row.addView(tv);
 
             tv = new TextView(view.getContext());
@@ -97,6 +106,7 @@ public class LeagueFragment extends Fragment {
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
             tv.setText("" + (teams[i].getGf() - teams[i].getGa()));
+            tv.setTypeface(tf);
             row.addView(tv);
 
             tv = new TextView(view.getContext());
@@ -104,6 +114,7 @@ public class LeagueFragment extends Fragment {
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
             tv.setText("" + teams[i].getPts());
+            tv.setTypeface(tf);
             row.addView(tv);
 
             tableLayout.addView(row);

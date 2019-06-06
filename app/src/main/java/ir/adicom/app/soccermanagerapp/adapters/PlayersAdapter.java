@@ -34,10 +34,16 @@ public class PlayersAdapter extends ArrayAdapter<Player> {
         TextView tvPlayerAge = (TextView) convertView.findViewById(R.id.tv_player_age);
         TextView tvPlayerScoring = (TextView) convertView.findViewById(R.id.tv_player_scoring);
         TextView tvPlayerGk = (TextView) convertView.findViewById(R.id.tv_player_gk);
+        TextView tvPlayerDefending = (TextView) convertView.findViewById(R.id.tv_player_defending);
+        TextView tvPlayerForm = (TextView) convertView.findViewById(R.id.tv_player_form);
+        TextView tvPlayerStamina = (TextView) convertView.findViewById(R.id.tv_player_stamina);
         tvPlayerName.setText(player.getName());
-        tvPlayerAge.setText("Age: " + player.getAge());
-        tvPlayerScoring.setText("SC: " + (int) player.getScoring());
-        tvPlayerGk.setText("GK: " + (int) player.getGoalkeeper());
+        tvPlayerAge.setText("سن: " + player.getAge() + " سال و " + player.getAgeSublevel() + " روز");
+        tvPlayerScoring.setText("گلزنی: " + (int) player.getScoring());
+        tvPlayerGk.setText("دروازبانی: " + (int) player.getGoalkeeper());
+        tvPlayerDefending.setText("دفاع: " + (int) player.getDefending());
+        tvPlayerForm.setText("فرم: " + (int) player.getMorale());
+        tvPlayerStamina.setText("قدرت بدنی: " + (int) player.getStamina());
 
         return convertView;
     }

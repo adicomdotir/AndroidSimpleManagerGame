@@ -9,10 +9,13 @@ public class Player {
     private int teamId;
     private String name;
     private float scoring;
+    private float goalkeeper;
+    private float defending;
     private int injury;
     private int morale;
-    private float goalkeeper;
+    private int stamina;
     private int age;
+    private int ageSublevel;
 
     public Player() {}
 
@@ -84,5 +87,29 @@ public class Player {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public float getDefending() {
+        return defending;
+    }
+
+    public void setDefending(float defending) {
+        this.defending = defending;
+    }
+
+    public int getStamina() {
+        return stamina;
+    }
+
+    public void setStamina(int stamina) {
+        this.stamina = stamina;
+    }
+
+    public int getAgeSublevel() {
+        return ageSublevel;
+    }
+
+    public void setAgeSublevel(int ageSublevel) {
+        this.ageSublevel = ageSublevel;
     }
 }

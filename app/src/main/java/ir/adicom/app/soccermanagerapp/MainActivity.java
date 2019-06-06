@@ -1,5 +1,6 @@
 package ir.adicom.app.soccermanagerapp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 import ir.adicom.app.soccermanagerapp.data.LocalData;
 import ir.adicom.app.soccermanagerapp.model.Player;
 import ir.adicom.app.soccermanagerapp.views.HomeFragment;
@@ -52,7 +54,10 @@ public class MainActivity extends AppCompatActivity
         navTeamNickname.setText(LocalData.teams[0].getNickname());
     }
 
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
+    }
 
     @Override
     public void onBackPressed() {

@@ -19,7 +19,7 @@ public class LocalData {
     public static void init() {
         weekIndex = 1;
         size = 8;
-        playerSize = 10;
+        playerSize = 18;
         teams = new Team[size];
         players = new Player[size * playerSize];
         matches = new Match[size * (size - 1)];
@@ -29,8 +29,9 @@ public class LocalData {
         teams[0] = new Team(1, team, "nothing", 0);
 
         for (int i = 1; i < size; i++) {
-            int n = (int) (Math.random() * FirstData.TEAM_NAMES.length);
-            String teamName = FirstData.TEAM_NAMES[n];
+            int tnf = (int) (Math.random() * FirstData.TEAM_NAMES_FIRST.length);
+            int tns = (int) (Math.random() * FirstData.TEAM_NAMES_SECOND.length);
+            String teamName = FirstData.TEAM_NAMES_FIRST[tnf] + " " + FirstData.TEAM_NAMES_SECOND[tns];
             boolean exist = false;
             for (Team t : teams) {
                 if (t != null && t.getName().equals(teamName)) {
@@ -56,14 +57,25 @@ public class LocalData {
                 String fullName = FirstData.FIRST_NAMES[n];
                 n = (int) (Math.random() * FirstData.LAST_NAMES.length);
                 fullName += " " + FirstData.LAST_NAMES[n];
+                player.setAge((int) (Math.random() * 17 + 17));
+                player.setAgeSublevel((int) (Math.random() * 111 + 1));
 
                 player.setName(fullName);
-                player.setAge((int) (Math.random() * 17 + 17));
-                player.setGoalkeeper((float) (Math.random() * 20) + 1);
-                player.setScoring((float) (Math.random() * 20) + 1);
+                if (j < 2) {
+                    player.setGoalkeeper((float) (Math.random() * 9) + 2);
+                    player.setScoring((float) (Math.random() * 1) + 1);
+                    player.setDefending((float) (Math.random() * 1) + 1);
+                } else {
+                    player.setGoalkeeper((float) (Math.random() * 1) + 1);
+                    player.setScoring((float) (Math.random() * 9) + 2);
+                    player.setDefending((float) (Math.random() * 9) + 2);
+                }
+
+                player.setStamina(8);
+                player.setMorale(8);
                 players[i * playerSize + j] = player;
 
-                overall += (player.getGoalkeeper() + player.getScoring()) / 2;
+                overall += (player.getGoalkeeper() + player.getScoring() + player.getDefending()) / 3;
             }
             teams[i].setOverral(overall / playerSize);
         }

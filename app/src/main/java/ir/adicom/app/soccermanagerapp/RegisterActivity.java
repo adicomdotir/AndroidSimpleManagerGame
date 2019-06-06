@@ -33,9 +33,10 @@ public class RegisterActivity extends AppCompatActivity {
         actionBar.setCustomView(R.layout.actionbar_layout);
 
         mSpinnerTeams = (Spinner) findViewById(R.id.sp_teams);
-        List<String> teams = new ArrayList<>();
-        Arrays.sort(FirstData.TEAM_NAMES);
-        teams.addAll(Arrays.asList(FirstData.TEAM_NAMES));
+        List<String> teams = generateSampleTeam();
+
+//        Arrays.sort(FirstData.TEAM_NAMES);
+//        teams.addAll(Arrays.asList(FirstData.TEAM_NAMES));
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, teams);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -68,5 +69,16 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private List<String> generateSampleTeam() {
+        List<String> stringList = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            int tnf = (int) (Math.random() * FirstData.TEAM_NAMES_FIRST.length);
+            int tns = (int) (Math.random() * FirstData.TEAM_NAMES_SECOND.length);
+            String name = FirstData.TEAM_NAMES_FIRST[tnf] + " " + FirstData.TEAM_NAMES_SECOND[tns];
+            stringList.add(name);
+        }
+        return stringList;
     }
 }
