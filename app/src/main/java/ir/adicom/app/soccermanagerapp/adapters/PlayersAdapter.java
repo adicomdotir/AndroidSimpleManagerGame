@@ -37,7 +37,7 @@ public class PlayersAdapter extends ArrayAdapter<Player> {
         TextView tvPlayerDefending = (TextView) convertView.findViewById(R.id.tv_player_defending);
         TextView tvPlayerForm = (TextView) convertView.findViewById(R.id.tv_player_form);
         TextView tvPlayerStamina = (TextView) convertView.findViewById(R.id.tv_player_stamina);
-        tvPlayerName.setText(player.getName());
+        tvPlayerName.setText(player.getShirtNumber() + ". " + player.getName());
         tvPlayerAge.setText("سن: " + player.getAge() + " سال و " + player.getAgeSublevel() + " روز");
         tvPlayerScoring.setText("گلزنی: " + (int) player.getScoring());
         tvPlayerGk.setText("دروازبانی: " + (int) player.getGoalkeeper());

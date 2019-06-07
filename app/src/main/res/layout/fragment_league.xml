@@ -8,68 +8,22 @@
     <TableLayout
         android:id="@+id/table"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="8dp">
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <TextView
-                android:text="تیم"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:textStyle="normal|bold"
-                android:textColor="@android:color/black" />
-            <TextView
-                android:text="بازی"
+                android:text="امتیاز"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
                 android:layout_weight="1"
                 android:textStyle="normal|bold"
-                fontPath="fonts/IRANSansMobile(FaNum).ttf"
-                android:textColor="@android:color/black"/>
-            <TextView
-                android:text="برد"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:gravity="center"
-                android:layout_weight="1"
-                android:textStyle="normal|bold"
                 android:textColor="@android:color/black" />
-            <TextView
-                android:text="مساوی"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:textStyle="normal|bold"
-                android:textColor="@android:color/black" />
-            <TextView
-                android:text="باخت"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:textStyle="normal|bold"
-                android:textColor="@android:color/black" />
-            <TextView
-                android:text="زده"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:textStyle="normal|bold"
-                android:textColor="@android:color/black" />
-            <TextView
-                android:text="خورده"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:textStyle="normal|bold"
-                android:textColor="@android:color/black" />
+
             <TextView
                 android:text="تفاضل"
                 android:layout_width="match_parent"
@@ -78,14 +32,70 @@
                 android:layout_weight="1"
                 android:textStyle="normal|bold"
                 android:textColor="@android:color/black" />
+
             <TextView
-                android:text="امتیاز"
+                android:text="خورده"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:textStyle="normal|bold"
                 android:textColor="@android:color/black" />
+
+            <TextView
+                android:text="زده"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textStyle="normal|bold"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:text="باخت"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textStyle="normal|bold"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:text="مساوی"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textStyle="normal|bold"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:text="برد"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textStyle="normal|bold"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:text="بازی"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textStyle="normal|bold"
+                android:textColor="@android:color/black"/>
+
+            <TextView
+                android:text="تیم"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textStyle="normal|bold"
+                android:textColor="@android:color/black" />
+
         </TableRow>
     </TableLayout>
 

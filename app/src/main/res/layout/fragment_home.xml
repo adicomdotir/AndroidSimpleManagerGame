@@ -8,7 +8,8 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="3">
 
         <TextView
             android:textColor="#000"
@@ -18,19 +19,194 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Hello World!"/>
+
+
     </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom|center_horizontal">
+        android:gravity="bottom|center_horizontal"
+        android:layout_height="0dp"
+        android:layout_weight="3">
 
         <Button
             android:text="انجام بازی"
             android:id="@+id/btn_game"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:id="@+id/tv_week"
+            android:text="هفته اول"
+            android:textColor="@android:color/background_light"
+            android:textSize="14sp"
+            android:gravity="top|center_horizontal" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:id="@+id/tv_day7"
+                android:text="جمعه"
+                android:textColor="@android:color/background_light"
+                android:textSize="14sp"
+                android:gravity="top|center_horizontal" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:id="@+id/tv_day6"
+                android:text="پنجشنبه"
+                android:textColor="@android:color/background_light"
+                android:textSize="14sp"
+                android:gravity="top|center_horizontal" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:id="@+id/tv_day5"
+                android:text="چهارشنبه"
+                android:textColor="@android:color/background_light"
+                android:textSize="14sp"
+                android:gravity="top|center_horizontal" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:id="@+id/tv_day4"
+                android:text="سه شنبه"
+                android:textColor="@android:color/background_light"
+                android:textSize="14sp"
+                android:gravity="top|center_horizontal" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:id="@+id/tv_day3"
+                android:text="دوشنبه"
+                android:textColor="@android:color/background_light"
+                android:textSize="14sp"
+                android:gravity="top|center_horizontal" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:id="@+id/tv_day2"
+                android:text="یکشنبه"
+                android:textColor="@android:color/background_light"
+                android:textSize="14sp"
+                android:gravity="top|center_horizontal" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:id="@+id/tv_day1"
+                android:text="شنبه"
+                android:textColor="@android:color/background_light"
+                android:textSize="14sp"
+                android:gravity="top|center_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:textColor="@android:color/background_light"
+                android:textSize="14sp"
+                android:gravity="top|center_horizontal" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:textColor="@android:color/background_light"
+                android:textSize="14sp"
+                android:gravity="top|center_horizontal" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:textColor="@android:color/background_light"
+                android:textSize="14sp"
+                android:gravity="top|center_horizontal" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:textColor="@android:color/background_light"
+                android:textSize="14sp"
+                android:gravity="top|center_horizontal" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:textColor="@android:color/background_light"
+                android:textSize="14sp"
+                android:gravity="top|center_horizontal" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:textColor="@android:color/background_light"
+                android:textSize="14sp"
+                android:gravity="top|center_horizontal"
+                android:text="لیگ" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:textColor="@android:color/background_light"
+                android:textSize="14sp"
+                android:gravity="top|center_horizontal" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

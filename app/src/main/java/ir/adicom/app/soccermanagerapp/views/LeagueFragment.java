@@ -49,55 +49,7 @@ public class LeagueFragment extends Fragment {
             textViewSetColor(tv, i);
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-            tv.setText(teams[i].getName());
-            tv.setTypeface(tf);
-            row.addView(tv);
-
-            tv = new TextView(view.getContext());
-            textViewSetColor(tv, i);
-            tv.setGravity(Gravity.CENTER);
-            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-            tv.setText("" + teams[i].getGame());
-            tv.setTypeface(tf);
-            row.addView(tv);
-
-            tv = new TextView(view.getContext());
-            textViewSetColor(tv, i);
-            tv.setGravity(Gravity.CENTER);
-            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-            tv.setText("" + teams[i].getWin());
-            tv.setTypeface(tf);
-            row.addView(tv);
-
-            tv = new TextView(view.getContext());
-            textViewSetColor(tv, i);
-            tv.setGravity(Gravity.CENTER);
-            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-            tv.setText("" + teams[i].getDraw());
-            tv.setTypeface(tf);
-            row.addView(tv);
-
-            tv = new TextView(view.getContext());
-            textViewSetColor(tv, i);
-            tv.setGravity(Gravity.CENTER);
-            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-            tv.setText("" + teams[i].getLose());
-            tv.setTypeface(tf);
-            row.addView(tv);
-
-            tv = new TextView(view.getContext());
-            textViewSetColor(tv, i);
-            tv.setGravity(Gravity.CENTER);
-            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-            tv.setText("" + teams[i].getGf());
-            tv.setTypeface(tf);
-            row.addView(tv);
-
-            tv = new TextView(view.getContext());
-            textViewSetColor(tv, i);
-            tv.setGravity(Gravity.CENTER);
-            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-            tv.setText("" + teams[i].getGa());
+            tv.setText("" + teams[i].getPts());
             tv.setTypeface(tf);
             row.addView(tv);
 
@@ -113,7 +65,55 @@ public class LeagueFragment extends Fragment {
             textViewSetColor(tv, i);
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-            tv.setText("" + teams[i].getPts());
+            tv.setText("" + teams[i].getGa());
+            tv.setTypeface(tf);
+            row.addView(tv);
+
+            tv = new TextView(view.getContext());
+            textViewSetColor(tv, i);
+            tv.setGravity(Gravity.CENTER);
+            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+            tv.setText("" + teams[i].getGf());
+            tv.setTypeface(tf);
+            row.addView(tv);
+
+            tv = new TextView(view.getContext());
+            textViewSetColor(tv, i);
+            tv.setGravity(Gravity.CENTER);
+            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+            tv.setText("" + teams[i].getLose());
+            tv.setTypeface(tf);
+            row.addView(tv);
+
+            tv = new TextView(view.getContext());
+            textViewSetColor(tv, i);
+            tv.setGravity(Gravity.CENTER);
+            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+            tv.setText("" + teams[i].getDraw());
+            tv.setTypeface(tf);
+            row.addView(tv);
+
+            tv = new TextView(view.getContext());
+            textViewSetColor(tv, i);
+            tv.setGravity(Gravity.CENTER);
+            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+            tv.setText("" + teams[i].getWin());
+            tv.setTypeface(tf);
+            row.addView(tv);
+
+            tv = new TextView(view.getContext());
+            textViewSetColor(tv, i);
+            tv.setGravity(Gravity.CENTER);
+            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+            tv.setText("" + teams[i].getGame());
+            tv.setTypeface(tf);
+            row.addView(tv);
+
+            tv = new TextView(view.getContext());
+            textViewSetColor(tv, i);
+            tv.setGravity(Gravity.CENTER);
+            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+            tv.setText(teams[i].getName());
             tv.setTypeface(tf);
             row.addView(tv);
 

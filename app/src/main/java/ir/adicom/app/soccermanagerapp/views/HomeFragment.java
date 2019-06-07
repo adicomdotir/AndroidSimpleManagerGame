@@ -47,12 +47,15 @@ public class HomeFragment extends Fragment {
             }
         }
         int previousWeek = LocalData.weekIndex - 1;
+
+        TextView tvWeek = (TextView) view.findViewById(R.id.tv_week);
+        tvWeek.setText("هفته " + (LocalData.weekIndex));
+
         StringBuilder sb = new StringBuilder();
 //        sb.append(team.getName() + "\n");
         sb.append("قدرت: " + LocalData.teams[0].getOverral() + "\n");
         sb.append("رتبه تیم: " + 1 + "\n");
         sb.append("تعداد بازیکنان: " + playerCount + "\n");
-        sb.append("هفته: " + (LocalData.weekIndex > LocalData.size * 2 - 2 ? "تمام" : LocalData.weekIndex) + "\n");
         for (int i = 0; i < LocalData.matches.length; i++) {
             if (LocalData.matches[i].getWeekId() == LocalData.weekIndex) {
                 if (LocalData.matches[i].getTeamHome() == 0) {

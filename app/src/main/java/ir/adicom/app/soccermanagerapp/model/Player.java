@@ -16,6 +16,7 @@ public class Player {
     private int stamina;
     private int age;
     private int ageSublevel;
+    private int shirtNumber;
 
     public Player() {}
 
@@ -111,5 +112,13 @@ public class Player {
 
     public void setAgeSublevel(int ageSublevel) {
         this.ageSublevel = ageSublevel;
+    }
+
+    public int getShirtNumber() {
+        return shirtNumber;
+    }
+
+    public void setShirtNumber(int shirtNumber) {
+        this.shirtNumber = shirtNumber;
     }
 }
