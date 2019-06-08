@@ -10,6 +10,7 @@ import ir.adicom.app.soccermanagerapp.model.Team;
 
 public class LocalData {
     public static int weekIndex;
+    public static int day = 1;
     public static int size;
     public static int playerSize;
     public static Team[] teams;
@@ -17,6 +18,7 @@ public class LocalData {
     public static  Match[] matches;
 
     public static void init() {
+        day = 1;
         weekIndex = 1;
         size = 8;
         playerSize = 18;

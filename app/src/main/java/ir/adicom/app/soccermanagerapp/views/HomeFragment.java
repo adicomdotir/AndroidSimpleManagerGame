@@ -93,14 +93,71 @@ public class HomeFragment extends Fragment {
         btnGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (LocalData.weekIndex <= LocalData.size * 2 - 2) {
-                    gameProcess();
-                    LocalData.weekIndex++;
-                    FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    ft.detach(fragment).attach(fragment).commit();
+                if (LocalData.day % 7 == 0) {
+                    if (LocalData.weekIndex <= LocalData.size * 2 - 2) {
+                        gameProcess();
+                        LocalData.weekIndex++;
+                        FragmentTransaction ft = getFragmentManager().beginTransaction();
+                        ft.detach(fragment).attach(fragment).commit();
+                    }
+                } else if (LocalData.day % 7 == 6) {
+                    btnGame.setText("انجام بازی");
                 }
+                LocalData.day++;
+                updateCalendarColor();
             }
         });
+
+        updateCalendarColor();
+    }
+
+    private void updateCalendarColor() {
+        TextView tv;
+        int x = LocalData.day % 7;
+        switch (x) {
+            case 1:
+                tv = (TextView) getActivity().findViewById(R.id.tv_day1);
+                tv.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+                tv = (TextView) getActivity().findViewById(R.id.tv_day7);
+                tv.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                break;
+            case 2:
+                tv = (TextView) getActivity().findViewById(R.id.tv_day2);
+                tv.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+                tv = (TextView) getActivity().findViewById(R.id.tv_day1);
+                tv.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                break;
+            case 3:
+                tv = (TextView) getActivity().findViewById(R.id.tv_day3);
+                tv.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+                tv = (TextView) getActivity().findViewById(R.id.tv_day2);
+                tv.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                break;
+            case 4:
+                tv = (TextView) getActivity().findViewById(R.id.tv_day4);
+                tv.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+                tv = (TextView) getActivity().findViewById(R.id.tv_day3);
+                tv.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                break;
+            case 5:
+                tv = (TextView) getActivity().findViewById(R.id.tv_day5);
+                tv.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+                tv = (TextView) getActivity().findViewById(R.id.tv_day4);
+                tv.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                break;
+            case 6:
+                tv = (TextView) getActivity().findViewById(R.id.tv_day6);
+                tv.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+                tv = (TextView) getActivity().findViewById(R.id.tv_day5);
+                tv.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                break;
+            case 0:
+                tv = (TextView) getActivity().findViewById(R.id.tv_day7);
+                tv.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+                tv = (TextView) getActivity().findViewById(R.id.tv_day6);
+                tv.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                break;
+        }
     }
 
     private void gameProcess() {
