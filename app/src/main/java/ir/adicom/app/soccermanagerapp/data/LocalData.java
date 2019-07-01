@@ -1,5 +1,8 @@
 package ir.adicom.app.soccermanagerapp.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ir.adicom.app.soccermanagerapp.model.Match;
 import ir.adicom.app.soccermanagerapp.model.Player;
 import ir.adicom.app.soccermanagerapp.model.Team;
@@ -15,13 +18,14 @@ public class LocalData {
     public static int playerSize;
     public static Team[] teams;
     public static Player[] players;
-    public static  Match[] matches;
+    public static List<Player> playerList = new ArrayList<>();
+    public static Match[] matches;
 
     public static void init() {
         day = 1;
         weekIndex = 1;
         size = 8;
-        playerSize = 18;
+        playerSize = 11;
         teams = new Team[size];
         players = new Player[size * playerSize];
         matches = new Match[size * (size - 1)];
@@ -64,7 +68,7 @@ public class LocalData {
                 player.setShirtNumber((int) (Math.random() * 99 + 1));
 
                 player.setName(fullName);
-                if (j < 2) {
+                if (j < 1) {
                     player.setGoalkeeper((float) (Math.random() * 9) + 2);
                     player.setScoring((float) (Math.random() * 1) + 1);
                     player.setDefending((float) (Math.random() * 1) + 1);
@@ -77,6 +81,7 @@ public class LocalData {
                 player.setStamina(8);
                 player.setMorale(8);
                 players[i * playerSize + j] = player;
+                playerList.add(player);
 
                 overall += (player.getGoalkeeper() + player.getScoring() + player.getDefending()) / 3;
             }
