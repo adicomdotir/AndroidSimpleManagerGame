@@ -17,13 +17,13 @@ public class GenerateOperator {
         int tnf = (int) (Math.random() * FirstData.TEAM_NAMES_FIRST.length);
         int tns = (int) (Math.random() * FirstData.TEAM_NAMES_SECOND.length);
         String name = FirstData.TEAM_NAMES_FIRST[tnf] + " " + FirstData.TEAM_NAMES_SECOND[tns];
-        team.setName(name);
+//        team.setName(name);
         return team;
     }
 
     public Player generatePlayer(int teamId) {
         Player player = new Player();
-        player.setTeamId(teamId);
+//        player.setTeamId(teamId);
 //        player.setPower((float) Math.random() * 10 + 1);
         String name = FirstData.FIRST_NAMES[(int) (Math.random() * FirstData.FIRST_NAMES.length)] +
                 " " + FirstData.LAST_NAMES[(int) (Math.random() * FirstData.LAST_NAMES.length)];

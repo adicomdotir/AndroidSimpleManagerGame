@@ -43,15 +43,15 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        players = LocalData.players;
+//        players = LocalData.players;
         initNavInfo(navigationView);
     }
 
     private void initNavInfo(NavigationView navigationView) {
-        TextView navTeamName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_team_name);
-        TextView navTeamNickname = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_team_nickname);
-        navTeamName.setText(LocalData.teams[0].getName());
-        navTeamNickname.setText(LocalData.teams[0].getNickname());
+//        TextView navTeamName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_team_name);
+//        TextView navTeamNickname = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_team_nickname);
+//        navTeamName.setText(LocalData.teams[0].getName());
+//        navTeamNickname.setText(LocalData.teams[0].getNickname());
     }
 
     @Override

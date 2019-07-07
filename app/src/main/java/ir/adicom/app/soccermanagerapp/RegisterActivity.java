@@ -60,9 +60,13 @@ public class RegisterActivity extends AppCompatActivity {
                 if (mSelectedTeam == null || mSelectedTeam.length() == 0) {
                     Toast.makeText(RegisterActivity.this, "Please select a team!!", Toast.LENGTH_SHORT).show();
                 } else {
-                    LocalData.init();
-                    LocalData.create(mSelectedTeam);
-                    LocalData.drawSchedule();
+                    ((App) getApplication()).getDaoSession().getTeamDao().deleteAll();
+                    ((App) getApplication()).getDaoSession().getPlayerDao().deleteAll();
+                    ((App) getApplication()).getDaoSession().getMatchDao().deleteAll();
+                    LocalData localData = new LocalData();
+                    localData.init((App) getApplication());
+                    localData.create(mSelectedTeam);
+                    localData.drawSchedule();
                     finish();
                     startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                 }

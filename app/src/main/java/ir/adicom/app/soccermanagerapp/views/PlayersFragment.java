@@ -10,13 +10,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import org.greenrobot.greendao.query.QueryBuilder;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import ir.adicom.app.soccermanagerapp.App;
 import ir.adicom.app.soccermanagerapp.R;
 import ir.adicom.app.soccermanagerapp.adapters.PlayersAdapter;
 import ir.adicom.app.soccermanagerapp.data.LocalData;
 import ir.adicom.app.soccermanagerapp.model.Player;
+import ir.adicom.app.soccermanagerapp.model.PlayerDao;
+import ir.adicom.app.soccermanagerapp.model.TeamDao;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,14 +45,15 @@ public class PlayersFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        List<Player> playerList = new ArrayList<>();
+        TeamDao teamDao = ((App) getActivity().getApplication()).getDaoSession().getTeamDao();
+        PlayerDao playerDao = ((App) getActivity().getApplication()).getDaoSession().getPlayerDao();
+        Long teamId = teamDao.loadAll().get(0).getId();
+
+        QueryBuilder<Player> qb = playerDao.queryBuilder();
+        qb.where(PlayerDao.Properties.TeamId.eq(teamId));
+        List<Player> playerList = qb.list();
 
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < LocalData.players.length; i++) {
-            if (LocalData.players[i].getTeamId() == 1) {
-                playerList.add(LocalData.players[i]);
-            }
-        }
 
         Player[] players = new Player[playerList.size()];
         players = playerList.toArray(players);

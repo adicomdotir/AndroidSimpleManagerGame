@@ -2,11 +2,16 @@ package ir.adicom.app.soccermanagerapp;
 
 import android.app.Application;
 
+import org.greenrobot.greendao.database.Database;
+
 import io.github.inflationx.calligraphy3.CalligraphyConfig;
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
 import io.github.inflationx.viewpump.ViewPump;
+import ir.adicom.app.soccermanagerapp.model.DaoMaster;
+import ir.adicom.app.soccermanagerapp.model.DaoSession;
 
 public class App extends Application {
+    private DaoSession daoSession;
 
     public static final String TAG = "TAG";
 
@@ -21,5 +26,13 @@ public class App extends Application {
                                 .setFontAttrId(R.attr.fontPath)
                                 .build()))
                 .build());
+
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "game-db");
+        Database db = helper.getWritableDb();
+        daoSession = new DaoMaster(db).newSession();
+    }
+
+    public DaoSession getDaoSession() {
+        return daoSession;
     }
 }

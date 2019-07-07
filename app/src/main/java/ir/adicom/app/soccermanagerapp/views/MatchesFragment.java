@@ -32,38 +32,38 @@ public class MatchesFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView tvMatches = (TextView) view.findViewById(R.id.tv_matches);
-        StringBuilder sb = new StringBuilder();
-        int len = LocalData.size / 2;
-        float week = len;
-        for (Match m : LocalData.matches) {
-            if (week % len == 0) {
-                sb.append("\n");
-                sb.append("هفته " + (int)(week / len));
-                sb.append("\n");
-                sb.append(LocalData.teams[m.getTeamHome()].getName());
-                if (m.getGoalTeamHome() != -1 && m.getGoalTeamAway() != -1) {
-                    sb.append(" " + m.getGoalTeamHome());
-                    sb.append("-");
-                    sb.append(m.getGoalTeamAway() + " ");
-                } else {
-                    sb.append(" x-x ");
-                }
-                sb.append(LocalData.teams[m.getTeamAway()].getName());
-            } else {
-                sb.append(LocalData.teams[m.getTeamHome()].getName());
-                if (m.getGoalTeamHome() != -1 && m.getGoalTeamAway() != -1) {
-                    sb.append(" " + m.getGoalTeamHome());
-                    sb.append("-");
-                    sb.append(m.getGoalTeamAway() + " ");
-                } else {
-                    sb.append(" x-x ");
-                }
-                sb.append(LocalData.teams[m.getTeamAway()].getName());
-            }
-            sb.append("\n");
-            week++;
-        }
-        tvMatches.setText(sb.toString());
+//        TextView tvMatches = (TextView) view.findViewById(R.id.tv_matches);
+//        StringBuilder sb = new StringBuilder();
+//        int len = LocalData.size / 2;
+//        float week = len;
+//        for (Match m : LocalData.matches) {
+//            if (week % len == 0) {
+//                sb.append("\n");
+//                sb.append("هفته " + (int)(week / len));
+//                sb.append("\n");
+//                sb.append(LocalData.teams[m.getTeamHome()].getName());
+//                if (m.getGoalTeamHome() != -1 && m.getGoalTeamAway() != -1) {
+//                    sb.append(" " + m.getGoalTeamHome());
+//                    sb.append("-");
+//                    sb.append(m.getGoalTeamAway() + " ");
+//                } else {
+//                    sb.append(" x-x ");
+//                }
+//                sb.append(LocalData.teams[m.getTeamAway()].getName());
+//            } else {
+//                sb.append(LocalData.teams[m.getTeamHome()].getName());
+//                if (m.getGoalTeamHome() != -1 && m.getGoalTeamAway() != -1) {
+//                    sb.append(" " + m.getGoalTeamHome());
+//                    sb.append("-");
+//                    sb.append(m.getGoalTeamAway() + " ");
+//                } else {
+//                    sb.append(" x-x ");
+//                }
+//                sb.append(LocalData.teams[m.getTeamAway()].getName());
+//            }
+//            sb.append("\n");
+//            week++;
+//        }
+//        tvMatches.setText(sb.toString());
     }
 }

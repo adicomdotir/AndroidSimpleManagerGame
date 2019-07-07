@@ -3,25 +3,30 @@ package ir.adicom.app.soccermanagerapp.data;
 import java.util.ArrayList;
 import java.util.List;
 
+import ir.adicom.app.soccermanagerapp.App;
 import ir.adicom.app.soccermanagerapp.model.Match;
 import ir.adicom.app.soccermanagerapp.model.Player;
+import ir.adicom.app.soccermanagerapp.model.PlayerDao;
 import ir.adicom.app.soccermanagerapp.model.Team;
+import ir.adicom.app.soccermanagerapp.model.TeamDao;
 
 /**
  * Created by adicom on 4/14/18.
  */
 
 public class LocalData {
-    public static int weekIndex;
+    public  int weekIndex;
     public static int day = 1;
-    public static int size;
-    public static int playerSize;
-    public static Team[] teams;
-    public static Player[] players;
-    public static List<Player> playerList = new ArrayList<>();
-    public static Match[] matches;
+    public  int size;
+    public  int playerSize;
+    public  Team[] teams;
+    public  Player[] players;
+    public  List<Player> playerList = new ArrayList<>();
+    public  Match[] matches;
+    private App app;
 
-    public static void init() {
+    public  void init(App application) {
+        this.app = application;
         day = 1;
         weekIndex = 1;
         size = 8;
@@ -31,8 +36,15 @@ public class LocalData {
         matches = new Match[size * (size - 1)];
     }
 
-    public static void create(String team) {
-        teams[0] = new Team(1, team, "nothing", 0);
+    public  void create(String team) {
+        TeamDao teamDao = app.getDaoSession().getTeamDao();
+        PlayerDao playerDao = app.getDaoSession().getPlayerDao();
+
+        teams[0] = new Team();
+        teams[0].setName(team);
+        teams[0].setDiv(0);
+        teams[0].setGroup(0);
+        teamDao.insert(teams[0]);
 
         for (int i = 1; i < size; i++) {
             int tnf = (int) (Math.random() * FirstData.TEAM_NAMES_FIRST.length);
@@ -45,18 +57,21 @@ public class LocalData {
                 }
             }
             if (!exist) {
-                teams[i] = new Team(i + 1, teamName, "nothing", 0);
+                teams[i] = new Team();
+                teams[i].setName(teamName);
+                teams[i].setDiv(0);
+                teams[i].setGroup(0);
+                teamDao.insert(teams[i]);
             } else {
                 i--;
             }
         }
 
-        for (int i = 0; i < size; i++) {
-            int overall = 0;
+        List<Team> teamList = teamDao.loadAll();
+        for (int i = 0; i < teamList.size(); i++) {
             for (int j = 0; j < playerSize; j++) {
                 Player player = new Player();
-                player.setId(i * playerSize + j + 1);
-                player.setTeamId(i + 1);
+                player.setTeamId(teamList.get(i).getId());
 
                 // Generate FULLNAME contain one FIRSTNAME and one LASTNAME
                 int n = (int) (Math.random() * FirstData.FIRST_NAMES.length);
@@ -64,7 +79,7 @@ public class LocalData {
                 n = (int) (Math.random() * FirstData.LAST_NAMES.length);
                 fullName += " " + FirstData.LAST_NAMES[n];
                 player.setAge((int) (Math.random() * 17 + 17));
-                player.setAgeSublevel((int) (Math.random() * 111 + 1));
+                player.setAgeSub((int) (Math.random() * 111 + 1));
                 player.setShirtNumber((int) (Math.random() * 99 + 1));
 
                 player.setName(fullName);
@@ -80,42 +95,42 @@ public class LocalData {
 
                 player.setStamina(8);
                 player.setMorale(8);
-                players[i * playerSize + j] = player;
-                playerList.add(player);
 
-                overall += (player.getGoalkeeper() + player.getScoring() + player.getDefending()) / 3;
+                playerDao.insert(player);
             }
-            teams[i].setOverral(overall / playerSize);
         }
     }
 
-    public static void drawSchedule() {
-        int[] schedule = new int[size];
+    public  void drawSchedule() {
+
+        TeamDao teamDao = app.getDaoSession().getTeamDao();
+        List<Team> teamList = teamDao.loadAll();
+
+        long[] schedule = new long[size];
         for (int i = 0; i < schedule.length; i++) {
-            schedule[i] = i;
+            schedule[i] = teamList.get(i).getId();
         }
-        for (int i = 0; i < LocalData.size * 2 - 2; i++) {
-            for (int j = 0; j < LocalData.size / 2; j++) {
-                matches[(i * (LocalData.size / 2)) + j] = new Match();
-                matches[(i * (LocalData.size / 2)) + j].setId((i * (LocalData.size / 2)) + j + 1);
-                matches[(i * (LocalData.size / 2)) + j].setWeekId(i + 1);
-                matches[(i * (LocalData.size / 2)) + j].setGoalTeamHome(-1);
-                matches[(i * (LocalData.size / 2)) + j].setGoalTeamAway(-1);
-                if (i < LocalData.size - 1) {
-                    matches[(i * (LocalData.size / 2)) + j].setTeamAway(schedule[LocalData.size - 1 - j]);
-                    matches[(i * (LocalData.size / 2)) + j].setTeamHome(schedule[j]);
+        for (int i = 0; i < size * 2 - 2; i++) {
+            for (int j = 0; j < size / 2; j++) {
+                matches[(i * (size / 2)) + j] = new Match();
+                matches[(i * (size / 2)) + j].setWeekId(i + 1);
+                matches[(i * (size / 2)) + j].setGoalTeamHome(-1);
+                matches[(i * (size / 2)) + j].setGoalTeamAway(-1);
+                if (i < size - 1) {
+                    matches[(i * (size / 2)) + j].setTeamAwayId(schedule[size - 1 - j]);
+                    matches[(i * (size / 2)) + j].setTeamHomeId(schedule[j]);
                 } else {
-                    matches[(i * (LocalData.size / 2)) + j].setTeamHome(schedule[LocalData.size - 1 - j]);
-                    matches[(i * (LocalData.size / 2)) + j].setTeamAway(schedule[j]);
+                    matches[(i * (size / 2)) + j].setTeamHomeId(schedule[size - 1 - j]);
+                    matches[(i * (size / 2)) + j].setTeamAwayId(schedule[j]);
                 }
             }
-            int temp = -1;
+            long temp = -1;
             for (int k = 1; k < schedule.length; k++) {
                 if (k == 1) {
                     temp = schedule[k];
                     schedule[k] = schedule[schedule.length - 1];
                 } else {
-                    int t = schedule[k];
+                    long t = schedule[k];
                     schedule[k] = temp;
                     temp = t;
                 }
