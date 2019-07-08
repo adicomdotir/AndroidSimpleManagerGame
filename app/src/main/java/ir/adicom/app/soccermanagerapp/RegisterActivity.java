@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -60,9 +61,15 @@ public class RegisterActivity extends AppCompatActivity {
                 if (mSelectedTeam == null || mSelectedTeam.length() == 0) {
                     Toast.makeText(RegisterActivity.this, "Please select a team!!", Toast.LENGTH_SHORT).show();
                 } else {
-                    ((App) getApplication()).getDaoSession().getTeamDao().deleteAll();
-                    ((App) getApplication()).getDaoSession().getPlayerDao().deleteAll();
-                    ((App) getApplication()).getDaoSession().getMatchDao().deleteAll();
+                    try {
+                        ((App) getApplication()).getDaoSession().getTeamDao().deleteAll();
+                        ((App) getApplication()).getDaoSession().getPlayerDao().deleteAll();
+                        ((App) getApplication()).getDaoSession().getMatchDao().deleteAll();
+                        ((App) getApplication()).getDaoSession().getTableDao().deleteAll();
+                    } catch (Exception e) {
+                        Log.e(App.TAG, e.getMessage());
+                    }
+
                     LocalData localData = new LocalData();
                     localData.init((App) getApplication());
                     localData.create(mSelectedTeam);

@@ -11,9 +11,13 @@ import ir.adicom.app.soccermanagerapp.model.DaoMaster;
 import ir.adicom.app.soccermanagerapp.model.DaoSession;
 
 public class App extends Application {
-    private DaoSession daoSession;
 
     public static final String TAG = "TAG";
+    public static int weekIndex = 1;
+    public static int day = 1;
+    public static int size = 8;
+
+    private DaoSession daoSession;
 
     @Override
     public void onCreate() {

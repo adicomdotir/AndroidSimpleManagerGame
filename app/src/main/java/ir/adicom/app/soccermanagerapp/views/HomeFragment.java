@@ -10,15 +10,23 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.greenrobot.greendao.query.QueryBuilder;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import ir.adicom.app.soccermanagerapp.App;
 import ir.adicom.app.soccermanagerapp.R;
 import ir.adicom.app.soccermanagerapp.data.LocalData;
 import ir.adicom.app.soccermanagerapp.model.Match;
+import ir.adicom.app.soccermanagerapp.model.MatchDao;
 import ir.adicom.app.soccermanagerapp.model.Player;
+import ir.adicom.app.soccermanagerapp.model.PlayerDao;
+import ir.adicom.app.soccermanagerapp.model.Table;
+import ir.adicom.app.soccermanagerapp.model.TableDao;
 import ir.adicom.app.soccermanagerapp.model.Team;
+import ir.adicom.app.soccermanagerapp.model.TeamDao;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,18 +57,18 @@ public class HomeFragment extends Fragment {
 //                playerCount++;
 //            }
 //        }
-//        int previousWeek = LocalData.weekIndex - 1;
-//
-//        TextView tvWeek = (TextView) view.findViewById(R.id.tv_week);
-//        tvWeek.setText("هفته " + (LocalData.weekIndex));
-//
-//        StringBuilder sb = new StringBuilder();
-////        sb.append(team.getName() + "\n");
+        int previousWeek = App.weekIndex - 1;
+
+        TextView tvWeek = (TextView) view.findViewById(R.id.tv_week);
+        tvWeek.setText("هفته " + (App.weekIndex));
+
+        StringBuilder sb = new StringBuilder();
+//        sb.append(team.getName() + "\n");
 //        sb.append("قدرت: " + LocalData.teams[0].getOverral() + "\n");
-//        sb.append("رتبه تیم: " + 1 + "\n");
-//        sb.append("تعداد بازیکنان: " + playerCount + "\n");
+        sb.append("رتبه تیم: " + 1 + "\n");
+        sb.append("تعداد بازیکنان: " + 11 + "\n");
 //        for (int i = 0; i < LocalData.matches.length; i++) {
-//            if (LocalData.matches[i].getWeekId() == LocalData.weekIndex) {
+//            if (LocalData.matches[i].getWeekId() == App.weekIndex) {
 //                if (LocalData.matches[i].getTeamHome() == 0) {
 //                    sb.append("حریف بعدی: " + LocalData.teams[LocalData.matches[i].getTeamAway()].getName());
 //                } else {
@@ -84,39 +92,39 @@ public class HomeFragment extends Fragment {
 //                }
 //            }
 //        }
-//
-//        final TextView txtHome = (TextView) view.findViewById(R.id.txt_home);
-//        txtHome.setText(sb.toString());
-//
-//        final Button btnGame = (Button) view.findViewById(R.id.btn_game);
-//        if (LocalData.weekIndex > LocalData.size * 2 - 2) {
-//            btnGame.setEnabled(false);
-//        }
-//        final Fragment fragment = this;
-//        btnGame.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (LocalData.day % 7 == 0) {
-//                    if (LocalData.weekIndex <= LocalData.size * 2 - 2) {
-//                        gameProcess();
-//                        LocalData.weekIndex++;
-//                        FragmentTransaction ft = getFragmentManager().beginTransaction();
-//                        ft.detach(fragment).attach(fragment).commit();
-//                    }
-//                } else if (LocalData.day % 7 == 6) {
-//                    btnGame.setText("انجام بازی");
-//                }
-//                LocalData.day++;
-//                updateCalendarColor();
-//            }
-//        });
-//
-//        updateCalendarColor();
+
+        final TextView txtHome = (TextView) view.findViewById(R.id.txt_home);
+        txtHome.setText(sb.toString());
+
+        final Button btnGame = (Button) view.findViewById(R.id.btn_game);
+        if (App.weekIndex > App.size * 2 - 2) {
+            btnGame.setEnabled(false);
+        }
+        final Fragment fragment = this;
+        btnGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (App.day % 7 == 0) {
+                    if (App.weekIndex <= (App.size - 1) * 2) {
+                        gameProcess();
+                        App.weekIndex++;
+                        FragmentTransaction ft = getFragmentManager().beginTransaction();
+                        ft.detach(fragment).attach(fragment).commit();
+                    }
+                } else if (App.day % 7 == 6) {
+                    btnGame.setText("انجام بازی");
+                }
+                App.day++;
+                updateCalendarColor();
+            }
+        });
+
+        updateCalendarColor();
     }
 
     private void updateCalendarColor() {
         TextView tv;
-        int x = LocalData.day % 7;
+        int x = App.day % 7;
         switch (x) {
             case 1:
                 tv = (TextView) getActivity().findViewById(R.id.tv_day1);
@@ -164,82 +172,82 @@ public class HomeFragment extends Fragment {
     }
 
     private void gameProcess() {
-//        Random gRandom = new Random(System.currentTimeMillis());
-//
-//        for (Match match : LocalData.matches) {
-//            if (match.getWeekId() == LocalData.weekIndex) {
-//                int awayTeamId = match.getTeamAway() + 1;
-//                List<Player> awayPlayers = new ArrayList<>();
-//                int homeTeamId = match.getTeamHome() + 1;
-//                List<Player> homePlayers = new ArrayList<>();
-//                for (int i = 0; i < LocalData.players.length; i++) {
-//                    if (LocalData.players[i].getTeamId() == awayTeamId) {
-//                        awayPlayers.add(LocalData.players[i]);
-//                    } else if (LocalData.players[i].getTeamId() == homeTeamId) {
-//                        homePlayers.add(LocalData.players[i]);
-//                    }
-//                }
-//
-//                int homeGoal = 0, awayGoal = 0;
-//                for (int i = 1; i <= 5; i++) {
-//                    // Home Event
-//                    if (homePlayers.get(i).getScoring() > awayPlayers.get(0).getGoalkeeper()) {
-//                        homeGoal++;
-//                    }
-//                    // Away Event
-//                    if (awayPlayers.get(i).getScoring() > homePlayers.get(0).getGoalkeeper()) {
-//                        awayGoal++;
-//                    }
-//                }
-//
-//                match.setGoalTeamHome(homeGoal);
-//                match.setGoalTeamAway(awayGoal);
-//
-//                updateTeamInfo(match);
-//            }
-//        }
+        Random gRandom = new Random(System.currentTimeMillis());
+        MatchDao matchDao = ((App) getActivity().getApplication()).getDaoSession().getMatchDao();
+        PlayerDao playerDao = ((App) getActivity().getApplication()).getDaoSession().getPlayerDao();
+        QueryBuilder<Match> qb = matchDao.queryBuilder();
+        qb.where(MatchDao.Properties.WeekId.eq(App.weekIndex));
+        List<Match> matches = qb.list();
+
+        for (Match match : matches) {
+            long awayTeamId = match.getTeamAwayId();
+            QueryBuilder<Player> playerQueryBuilder = playerDao.queryBuilder();
+            playerQueryBuilder.where(PlayerDao.Properties.TeamId.eq(awayTeamId));
+            List<Player> awayPlayers = playerQueryBuilder.list();
+
+            long homeTeamId = match.getTeamHomeId();
+            playerQueryBuilder = playerDao.queryBuilder();
+            playerQueryBuilder.where(PlayerDao.Properties.TeamId.eq(homeTeamId));
+            List<Player> homePlayers = playerQueryBuilder.list();
+
+            int homeGoal = 0, awayGoal = 0;
+            for (int i = 1; i <= 5; i++) {
+                // Home Event
+                if (homePlayers.get(i).getScoring() > awayPlayers.get(0).getGoalkeeper()) {
+                    homeGoal++;
+                }
+                // Away Event
+                if (awayPlayers.get(i).getScoring() > homePlayers.get(0).getGoalkeeper()) {
+                    awayGoal++;
+                }
+            }
+
+            match.setGoalTeamHome(homeGoal);
+            match.setGoalTeamAway(awayGoal);
+            matchDao.update(match);
+            updateTeamInfo(match);
+        }
     }
 
     private void updateTeamInfo(Match match) {
-//        Team teamHome = LocalData.teams[match.getTeamHome()];
-//        Team teamAway = LocalData.teams[match.getTeamAway()];
-//        if (match.getGoalTeamHome() > match.getGoalTeamAway()) {
-//            // Home Team
-//            teamHome.setGame(teamHome.getGame() + 1);
-//            teamHome.setWin(teamHome.getWin() + 1);
-//            teamHome.setGa(teamHome.getGa() + match.getGoalTeamAway());
-//            teamHome.setGf(teamHome.getGf() + match.getGoalTeamHome());
-//            teamHome.setPts(teamHome.getPts() + 3);
-//            // Away Team
-//            teamAway.setGame(teamAway.getGame() + 1);
-//            teamAway.setLose(teamAway.getLose() + 1);
-//            teamAway.setGa(teamAway.getGa() + match.getGoalTeamHome());
-//            teamAway.setGf(teamAway.getGf() + match.getGoalTeamAway());
-//        } else if (match.getGoalTeamHome() < match.getGoalTeamAway()) {
-//            // Away Team
-//            teamAway.setGame(teamAway.getGame() + 1);
-//            teamAway.setWin(teamAway.getWin() + 1);
-//            teamAway.setGa(teamAway.getGa() + match.getGoalTeamHome());
-//            teamAway.setGf(teamAway.getGf() + match.getGoalTeamAway());
-//            teamAway.setPts(teamAway.getPts() + 3);
-//            // Home Team
-//            teamHome.setGame(teamHome.getGame() + 1);
-//            teamHome.setLose(teamHome.getLose() + 1);
-//            teamHome.setGa(teamHome.getGa() + match.getGoalTeamAway());
-//            teamHome.setGf(teamHome.getGf() + match.getGoalTeamHome());
-//        } else {
-//            // Home Team
-//            teamHome.setGame(teamHome.getGame() + 1);
-//            teamHome.setDraw(teamHome.getDraw() + 1);
-//            teamHome.setGa(teamHome.getGa() + match.getGoalTeamAway());
-//            teamHome.setGf(teamHome.getGf() + match.getGoalTeamHome());
-//            teamHome.setPts(teamHome.getPts() + 1);
-//            // Away Team
-//            teamAway.setGame(teamAway.getGame() + 1);
-//            teamAway.setDraw(teamAway.getDraw() + 1);
-//            teamAway.setGa(teamAway.getGa() + match.getGoalTeamHome());
-//            teamAway.setGf(teamAway.getGf() + match.getGoalTeamAway());
-//            teamAway.setPts(teamAway.getPts() + 1);
-//        }
+        TableDao tableDao = ((App) getActivity().getApplication()).getDaoSession().getTableDao();
+        Table homeTable = tableDao.load(match.getTeamHomeId());
+        Table awayTable = tableDao.load(match.getTeamAwayId());
+
+        if (match.getGoalTeamHome() > match.getGoalTeamAway()) {
+            // Home Team
+            homeTable.setWin(homeTable.getWin() + 1);
+            homeTable.setGa(homeTable.getGa() + match.getGoalTeamAway());
+            homeTable.setGf(homeTable.getGf() + match.getGoalTeamHome());
+            homeTable.setPts(homeTable.getPts() + 3);
+            // Away Team
+            awayTable.setLose(awayTable.getLose() + 1);
+            awayTable.setGa(awayTable.getGa() + match.getGoalTeamHome());
+            awayTable.setGf(awayTable.getGf() + match.getGoalTeamAway());
+        } else if (match.getGoalTeamHome() < match.getGoalTeamAway()) {
+            // Away Team
+            awayTable.setWin(awayTable.getWin() + 1);
+            awayTable.setGa(awayTable.getGa() + match.getGoalTeamHome());
+            awayTable.setGf(awayTable.getGf() + match.getGoalTeamAway());
+            awayTable.setPts(awayTable.getPts() + 3);
+            // Home Team
+            homeTable.setLose(homeTable.getLose() + 1);
+            homeTable.setGa(homeTable.getGa() + match.getGoalTeamAway());
+            homeTable.setGf(homeTable.getGf() + match.getGoalTeamHome());
+        } else {
+            // Home Team
+            homeTable.setDraw(homeTable.getDraw() + 1);
+            homeTable.setGa(homeTable.getGa() + match.getGoalTeamAway());
+            homeTable.setGf(homeTable.getGf() + match.getGoalTeamHome());
+            homeTable.setPts(homeTable.getPts() + 1);
+            // Away Team
+            awayTable.setDraw(awayTable.getDraw() + 1);
+            awayTable.setGa(awayTable.getGa() + match.getGoalTeamHome());
+            awayTable.setGf(awayTable.getGf() + match.getGoalTeamAway());
+            awayTable.setPts(awayTable.getPts() + 1);
+        }
+
+        tableDao.update(homeTable);
+        tableDao.update(awayTable);
     }
 }
