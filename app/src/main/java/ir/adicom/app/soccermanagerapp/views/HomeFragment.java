@@ -17,6 +17,10 @@ import java.util.Random;
 
 import ir.adicom.app.soccermanagerapp.App;
 import ir.adicom.app.soccermanagerapp.R;
+import ir.adicom.app.soccermanagerapp.model.Event;
+import ir.adicom.app.soccermanagerapp.model.EventDao;
+import ir.adicom.app.soccermanagerapp.model.EventDetail;
+import ir.adicom.app.soccermanagerapp.model.EventDetailDao;
 import ir.adicom.app.soccermanagerapp.model.Match;
 import ir.adicom.app.soccermanagerapp.model.MatchDao;
 import ir.adicom.app.soccermanagerapp.model.Player;
@@ -104,8 +108,11 @@ public class HomeFragment extends Fragment {
                     if (App.weekIndex <= (App.size - 1) * 2) {
                         gameProcess();
                         App.weekIndex++;
+//                        FragmentTransaction ft = getFragmentManager().beginTransaction();
+//                        ft.detach(fragment).attach(fragment).commit();
                         FragmentTransaction ft = getFragmentManager().beginTransaction();
-                        ft.detach(fragment).attach(fragment).commit();
+                        ft.replace(R.id.content_main, new GameFragment());
+                        ft.commit();
                     }
                 } else if (App.day % 7 == 6) {
                     btnGame.setText("انجام بازی");
@@ -175,6 +182,10 @@ public class HomeFragment extends Fragment {
         qb.where(MatchDao.Properties.WeekId.eq(App.weekIndex));
         List<Match> matches = qb.list();
 
+        EventDao eventDao = ((App) getActivity().getApplication()).getDaoSession().getEventDao();
+        EventDetailDao eventDetailDao = ((App) getActivity().getApplication()).getDaoSession().getEventDetailDao();
+        List<EventDetail> eventDetails = eventDetailDao.loadAll();
+
         for (Match match : matches) {
             long awayTeamId = match.getTeamAwayId();
             QueryBuilder<Player> playerQueryBuilder = playerDao.queryBuilder();
@@ -189,13 +200,29 @@ public class HomeFragment extends Fragment {
             int homeGoal = 0, awayGoal = 0;
             for (int i = 1; i <= 5; i++) {
                 // Home Event
+                int edHome = gRandom.nextInt(eventDetails.size());
+                Event eventHome = new Event();
                 if (homePlayers.get(i).getScoring() > awayPlayers.get(0).getGoalkeeper()) {
                     homeGoal++;
+                    eventHome.setIsGoal(true);
                 }
+                eventHome.setEventDetailId(eventDetails.get(edHome).getId());
+                eventHome.setMatchId(match.getId());
+                eventHome.setPlayerId(homePlayers.get(i).getId());
+                eventHome.setTeamId(match.getTeamHomeId());
+                eventDao.insert(eventHome);
                 // Away Event
+                int edAway = gRandom.nextInt(eventDetails.size());
+                Event eventAway = new Event();
                 if (awayPlayers.get(i).getScoring() > homePlayers.get(0).getGoalkeeper()) {
                     awayGoal++;
+                    eventAway.setIsGoal(true);
                 }
+                eventAway.setEventDetailId(eventDetails.get(edAway).getId());
+                eventAway.setMatchId(match.getId());
+                eventAway.setPlayerId(awayPlayers.get(i).getId());
+                eventAway.setTeamId(match.getTeamHomeId());
+                eventDao.insert(eventAway);
             }
 
             match.setGoalTeamHome(homeGoal);

@@ -18,6 +18,8 @@ import java.util.List;
 
 import ir.adicom.app.soccermanagerapp.data.FirstData;
 import ir.adicom.app.soccermanagerapp.data.LocalData;
+import ir.adicom.app.soccermanagerapp.model.EventDetail;
+import ir.adicom.app.soccermanagerapp.model.EventDetailDao;
 
 public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "TAG";
@@ -66,6 +68,8 @@ public class RegisterActivity extends AppCompatActivity {
                         ((App) getApplication()).getDaoSession().getPlayerDao().deleteAll();
                         ((App) getApplication()).getDaoSession().getMatchDao().deleteAll();
                         ((App) getApplication()).getDaoSession().getTableDao().deleteAll();
+                        ((App) getApplication()).getDaoSession().getEventDao().deleteAll();
+                        ((App) getApplication()).getDaoSession().getEventDetailDao().deleteAll();
                     } catch (Exception e) {
                         Log.e(App.TAG, e.getMessage());
                     }
@@ -74,12 +78,22 @@ public class RegisterActivity extends AppCompatActivity {
                     localData.init((App) getApplication());
                     localData.create(mSelectedTeam);
                     localData.drawSchedule();
+                    addSeedEventDetail();
                     finish();
                     startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                 }
             }
         });
 
+    }
+
+    private void addSeedEventDetail() {
+        EventDetailDao eventDetailDao = ((App) getApplication()).getDaoSession().getEventDetailDao();
+        for (int i = 0; i < FirstData.EVENTS.length; i++) {
+            EventDetail eventDetail = new EventDetail();
+            eventDetail.setTitle(FirstData.EVENTS[i]);
+            eventDetailDao.insert(eventDetail);
+        }
     }
 
     private List<String> generateSampleTeam() {

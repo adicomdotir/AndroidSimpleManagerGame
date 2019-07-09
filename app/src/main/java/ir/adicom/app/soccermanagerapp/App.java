@@ -16,6 +16,7 @@ public class App extends Application {
     public static int weekIndex = 1;
     public static int day = 1;
     public static int size = 8;
+    public static long teamId = -1;
 
     private DaoSession daoSession;
 

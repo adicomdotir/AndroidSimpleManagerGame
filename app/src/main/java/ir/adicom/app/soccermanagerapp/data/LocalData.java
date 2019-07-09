@@ -62,6 +62,7 @@ public class LocalData {
         }
 
         List<Team> teamList = teamDao.loadAll();
+        App.teamId = teamList.get(0).getId();
         for (int i = 0; i < teamList.size(); i++) {
             Table table = new Table();
             table.setTeamId(teamList.get(i).getId());
