@@ -43,7 +43,7 @@ public class LeagueFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         TableDao tableDao = ((App) getActivity().getApplication()).getDaoSession().getTableDao();
-        List<Table> tables = tableDao.queryBuilder().orderDesc(TableDao.Properties.Pts, TableDao.Properties.Gf).list();
+        List<Table> tables = tableDao.queryBuilder().orderDesc(TableDao.Properties.Pts, TableDao.Properties.Gd).list();
 //        sort(teams);
 
         TableLayout tableLayout = (TableLayout) view.findViewById(R.id.table);
@@ -63,7 +63,7 @@ public class LeagueFragment extends Fragment {
             textViewSetColor(tv, i);
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-            tv.setText("" + (tables.get(i).getGf() - tables.get(i).getGa()));
+            tv.setText("" + tables.get(i).getGd());
             tv.setTypeface(tf);
             row.addView(tv);
 
@@ -129,53 +129,14 @@ public class LeagueFragment extends Fragment {
     }
 
     private void textViewSetColor(TextView tv, int index) {
-//        if (index == 0) {
-//            tv.setTextColor(Color.parseColor("#22AA22"));
-//        } else if (index == LocalData.size - 1 || index == LocalData.size - 2) {
-//            tv.setTextColor(Color.RED);
-//        } else if (index == LocalData.size - 3 || index == LocalData.size - 4) {
-//            tv.setTextColor(Color.parseColor("#FF9900"));
-//        } else {
-//            tv.setTextColor(Color.BLACK);
-//        }
-    }
-
-    private void sort(Team[] teams) {
-//        // For points
-//        for (int i = 0; i < teams.length; i++) {
-//            for (int j = i + 1; j < teams.length; j++) {
-//                if (teams[i].getPts() < teams[j].getPts()) {
-//                    Team temp = teams[i];
-//                    teams[i] = teams[j];
-//                    teams[j] = temp;
-//                }
-//            }
-//        }
-//        // For goal differance
-//        for (int i = 0; i < teams.length; i++) {
-//            for (int j = i + 1; j < teams.length; j++) {
-//                if (teams[i].getPts() == teams[j].getPts()) {
-//                    if (teams[i].getGf() - teams[i].getGa() < teams[j].getGf() - teams[j].getGa()) {
-//                        Team temp = teams[i];
-//                        teams[i] = teams[j];
-//                        teams[j] = temp;
-//                    }
-//                }
-//            }
-//        }
-//        // For goal forward
-//        for (int i = 0; i < teams.length; i++) {
-//            for (int j = i + 1; j < teams.length; j++) {
-//                if (teams[i].getPts() == teams[j].getPts()) {
-//                    if (teams[i].getGf() - teams[i].getGa() == teams[j].getGf() - teams[j].getGa()) {
-//                        if (teams[i].getGf() < teams[j].getGf()) {
-//                            Team temp = teams[i];
-//                            teams[i] = teams[j];
-//                            teams[j] = temp;
-//                        }
-//                    }
-//                }
-//            }
-//        }
+        if (index == 0) {
+            tv.setTextColor(Color.parseColor("#22AA22"));
+        } else if (index == App.size - 1 || index == App.size - 2) {
+            tv.setTextColor(Color.RED);
+        } else if (index == App.size - 3 || index == App.size - 4) {
+            tv.setTextColor(Color.parseColor("#FF9900"));
+        } else {
+            tv.setTextColor(Color.BLACK);
+        }
     }
 }

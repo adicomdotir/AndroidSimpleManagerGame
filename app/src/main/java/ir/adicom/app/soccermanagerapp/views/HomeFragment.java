@@ -12,21 +12,17 @@ import android.widget.TextView;
 
 import org.greenrobot.greendao.query.QueryBuilder;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import ir.adicom.app.soccermanagerapp.App;
 import ir.adicom.app.soccermanagerapp.R;
-import ir.adicom.app.soccermanagerapp.data.LocalData;
 import ir.adicom.app.soccermanagerapp.model.Match;
 import ir.adicom.app.soccermanagerapp.model.MatchDao;
 import ir.adicom.app.soccermanagerapp.model.Player;
 import ir.adicom.app.soccermanagerapp.model.PlayerDao;
 import ir.adicom.app.soccermanagerapp.model.Table;
 import ir.adicom.app.soccermanagerapp.model.TableDao;
-import ir.adicom.app.soccermanagerapp.model.Team;
-import ir.adicom.app.soccermanagerapp.model.TeamDao;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -219,21 +215,25 @@ public class HomeFragment extends Fragment {
             homeTable.setWin(homeTable.getWin() + 1);
             homeTable.setGa(homeTable.getGa() + match.getGoalTeamAway());
             homeTable.setGf(homeTable.getGf() + match.getGoalTeamHome());
+            homeTable.setGd(homeTable.getGd() + match.getGoalTeamHome() - match.getGoalTeamAway());
             homeTable.setPts(homeTable.getPts() + 3);
             // Away Team
             awayTable.setLose(awayTable.getLose() + 1);
             awayTable.setGa(awayTable.getGa() + match.getGoalTeamHome());
             awayTable.setGf(awayTable.getGf() + match.getGoalTeamAway());
+            awayTable.setGd(awayTable.getGd() - match.getGoalTeamHome() + match.getGoalTeamAway());
         } else if (match.getGoalTeamHome() < match.getGoalTeamAway()) {
             // Away Team
             awayTable.setWin(awayTable.getWin() + 1);
             awayTable.setGa(awayTable.getGa() + match.getGoalTeamHome());
             awayTable.setGf(awayTable.getGf() + match.getGoalTeamAway());
+            awayTable.setGd(awayTable.getGd() - match.getGoalTeamHome() + match.getGoalTeamAway());
             awayTable.setPts(awayTable.getPts() + 3);
             // Home Team
             homeTable.setLose(homeTable.getLose() + 1);
             homeTable.setGa(homeTable.getGa() + match.getGoalTeamAway());
             homeTable.setGf(homeTable.getGf() + match.getGoalTeamHome());
+            homeTable.setGd(homeTable.getGd() + match.getGoalTeamHome() - match.getGoalTeamAway());
         } else {
             // Home Team
             homeTable.setDraw(homeTable.getDraw() + 1);

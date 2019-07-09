@@ -22,6 +22,7 @@ public class Table {
     private int draw;
     private int gf;
     private int ga;
+    private int gd;
     private int pts;
     private int div;
     private int group;
@@ -31,8 +32,8 @@ public class Table {
     /** Used for active entity operations. */
     @Generated(hash = 1200932703)
     private transient TableDao myDao;
-    @Generated(hash = 1896076272)
-    public Table(Long id, Long teamId, int win, int lose, int draw, int gf, int ga,
+    @Generated(hash = 282349670)
+    public Table(Long id, Long teamId, int win, int lose, int draw, int gf, int ga, int gd,
             int pts, int div, int group) {
         this.id = id;
         this.teamId = teamId;
@@ -41,6 +42,7 @@ public class Table {
         this.draw = draw;
         this.gf = gf;
         this.ga = ga;
+        this.gd = gd;
         this.pts = pts;
         this.div = div;
         this.group = group;
@@ -169,6 +171,12 @@ public class Table {
             throw new DaoException("Entity is detached from DAO context");
         }
         myDao.update(this);
+    }
+    public int getGd() {
+        return this.gd;
+    }
+    public void setGd(int gd) {
+        this.gd = gd;
     }
     /** called by internal mechanisms, do not call yourself. */
     @Generated(hash = 1052514995)
