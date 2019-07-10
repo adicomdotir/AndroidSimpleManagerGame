@@ -7,13 +7,12 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
-            android:textColor="#000000"
-            android:gravity="center"
-            android:id="@+id/tv_matches"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:id="@+id/ll_match"
+            android:gravity="center"></LinearLayout>
     </ScrollView>
 
 </FrameLayout>

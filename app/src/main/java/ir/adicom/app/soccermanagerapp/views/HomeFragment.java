@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -200,28 +201,35 @@ public class HomeFragment extends Fragment {
             int homeGoal = 0, awayGoal = 0;
             for (int i = 1; i <= 5; i++) {
                 // Home Event
+                Player homePlayer = homePlayers.get(gRandom.nextInt(10) + 1);
                 int edHome = gRandom.nextInt(eventDetails.size());
                 Event eventHome = new Event();
-                if (homePlayers.get(i).getScoring() > awayPlayers.get(0).getGoalkeeper()) {
+                int playerChance = gRandom.nextInt((int) homePlayer.getScoring());
+                int gkChance = gRandom.nextInt((int) awayPlayers.get(0).getGoalkeeper());
+                Log.e(App.TAG, homePlayer.getScoring() + "[" + playerChance + "-" + gkChance + "]" + awayPlayers.get(0).getGoalkeeper());
+                if (playerChance > gkChance) {
                     homeGoal++;
                     eventHome.setIsGoal(true);
                 }
                 eventHome.setEventDetailId(eventDetails.get(edHome).getId());
                 eventHome.setMatchId(match.getId());
-                eventHome.setPlayerId(homePlayers.get(i).getId());
+                eventHome.setPlayerId(homePlayer.getId());
                 eventHome.setTeamId(match.getTeamHomeId());
                 eventDao.insert(eventHome);
                 // Away Event
+                Player awayPlayer = awayPlayers.get(gRandom.nextInt(10) + 1);
                 int edAway = gRandom.nextInt(eventDetails.size());
                 Event eventAway = new Event();
-                if (awayPlayers.get(i).getScoring() > homePlayers.get(0).getGoalkeeper()) {
+                playerChance = gRandom.nextInt((int) awayPlayer.getScoring());
+                gkChance = gRandom.nextInt((int) homePlayers.get(0).getGoalkeeper());
+                if (playerChance > gkChance) {
                     awayGoal++;
                     eventAway.setIsGoal(true);
                 }
                 eventAway.setEventDetailId(eventDetails.get(edAway).getId());
                 eventAway.setMatchId(match.getId());
-                eventAway.setPlayerId(awayPlayers.get(i).getId());
-                eventAway.setTeamId(match.getTeamHomeId());
+                eventAway.setPlayerId(awayPlayer.getId());
+                eventAway.setTeamId(match.getTeamAwayId());
                 eventDao.insert(eventAway);
             }
 

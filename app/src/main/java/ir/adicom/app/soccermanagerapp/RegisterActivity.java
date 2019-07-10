@@ -64,6 +64,10 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Please select a team!!", Toast.LENGTH_SHORT).show();
                 } else {
                     try {
+                        App.weekIndex = 1;
+                        App.day = 1;
+                        App.size = 8;
+                        App.teamId = -1;
                         ((App) getApplication()).getDaoSession().getTeamDao().deleteAll();
                         ((App) getApplication()).getDaoSession().getPlayerDao().deleteAll();
                         ((App) getApplication()).getDaoSession().getMatchDao().deleteAll();

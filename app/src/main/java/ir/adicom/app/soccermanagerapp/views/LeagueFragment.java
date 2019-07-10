@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +27,7 @@ import ir.adicom.app.soccermanagerapp.model.Team;
  * A simple {@link Fragment} subclass.
  */
 public class LeagueFragment extends Fragment {
-
+    private long teamId = -1;
 
     public LeagueFragment() {
         // Required empty public constructor
@@ -43,11 +44,12 @@ public class LeagueFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         TableDao tableDao = ((App) getActivity().getApplication()).getDaoSession().getTableDao();
-        List<Table> tables = tableDao.queryBuilder().orderDesc(TableDao.Properties.Pts, TableDao.Properties.Gd).list();
+        final List<Table> tables = tableDao.queryBuilder().orderDesc(TableDao.Properties.Pts, TableDao.Properties.Gd).list();
 //        sort(teams);
 
         TableLayout tableLayout = (TableLayout) view.findViewById(R.id.table);
         for (int i = 0; i < tables.size(); i++) {
+            teamId = tables.get(i).getTeamId();
             TableRow row = new TableRow(view.getContext());
             Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/IRANSansMobile(FaNum).ttf");
 
@@ -121,6 +123,18 @@ public class LeagueFragment extends Fragment {
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
             tv.setText(tables.get(i).getTeam().getName());
             tv.setTypeface(tf);
+            tv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    PlayersFragment playersFragment = new PlayersFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putLong("team_id", teamId);
+                    playersFragment.setArguments(bundle);
+                    ft.replace(R.id.content_main, playersFragment);
+                    ft.commit();
+                }
+            });
             row.addView(tv);
 
             tableLayout.addView(row);

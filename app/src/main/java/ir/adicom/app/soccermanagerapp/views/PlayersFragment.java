@@ -27,12 +27,17 @@ import ir.adicom.app.soccermanagerapp.model.TeamDao;
  * A simple {@link Fragment} subclass.
  */
 public class PlayersFragment extends Fragment {
-
+    private Long teamId;
 
     public PlayersFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+//        teamId = this.getArguments().getLong("team_id", 0);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,13 +52,16 @@ public class PlayersFragment extends Fragment {
 
         TeamDao teamDao = ((App) getActivity().getApplication()).getDaoSession().getTeamDao();
         PlayerDao playerDao = ((App) getActivity().getApplication()).getDaoSession().getPlayerDao();
-        Long teamId = teamDao.loadAll().get(0).getId();
 
+        Bundle bundle = getArguments();
+        if (bundle != null) teamId = bundle.getLong("team_id");
+
+        if (teamId == null) {
+            teamId = teamDao.loadAll().get(0).getId();
+        }
         QueryBuilder<Player> qb = playerDao.queryBuilder();
         qb.where(PlayerDao.Properties.TeamId.eq(teamId));
         List<Player> playerList = qb.list();
-
-        StringBuilder sb = new StringBuilder();
 
         Player[] players = new Player[playerList.size()];
         players = playerList.toArray(players);

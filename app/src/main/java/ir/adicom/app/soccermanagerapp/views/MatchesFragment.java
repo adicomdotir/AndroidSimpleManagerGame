@@ -1,11 +1,15 @@
 package ir.adicom.app.soccermanagerapp.views;
 
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -20,6 +24,9 @@ import ir.adicom.app.soccermanagerapp.model.MatchDao;
  * A simple {@link Fragment} subclass.
  */
 public class MatchesFragment extends Fragment {
+
+    private LinearLayout mLinearLayout;
+    private Typeface mTypeface;
 
     public MatchesFragment() {
         // Required empty public constructor
@@ -36,40 +43,55 @@ public class MatchesFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView tvMatches = (TextView) view.findViewById(R.id.tv_matches);
-        StringBuilder sb = new StringBuilder();
+        mLinearLayout =  (LinearLayout) view.findViewById(R.id.ll_match);
+        mTypeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/IRANSansMobile(FaNum).ttf");
+
         int len = 4;
         float week = len;
         MatchDao matchDao = ((App) getActivity().getApplication()).getDaoSession().getMatchDao();
         List<Match> matches = matchDao.loadAll();
         for (Match m : matches) {
             if (week % len == 0) {
-                sb.append("\n");
-                sb.append("هفته " + (int)(week / len));
-                sb.append("\n");
-                sb.append(m.getTeamHome().getName());
+                createTextView("", Color.GREEN);
+                createTextView("هفته " + (int)(week / len), Color.BLACK);
+                String temp = m.getTeamHome().getName();
                 if (m.getGoalTeamHome() != -1 && m.getGoalTeamAway() != -1) {
-                    sb.append(" " + m.getGoalTeamHome());
-                    sb.append("-");
-                    sb.append(m.getGoalTeamAway() + " ");
+                    temp += " " + m.getGoalTeamHome();
+                    temp += "-";
+                    temp += m.getGoalTeamAway() + " ";
                 } else {
-                    sb.append(" x-x ");
+                    temp += " x-x ";
                 }
-                sb.append(m.getTeamAway().getName());
+                temp += m.getTeamAway().getName();
+                createTextView(temp, Color.BLACK);
             } else {
-                sb.append(m.getTeamHome().getName());
+                String temp = m.getTeamHome().getName();
                 if (m.getGoalTeamHome() != -1 && m.getGoalTeamAway() != -1) {
-                    sb.append(" " + m.getGoalTeamHome());
-                    sb.append("-");
-                    sb.append(m.getGoalTeamAway() + " ");
+                    temp += " " + m.getGoalTeamHome();
+                    temp += "-";
+                    temp += m.getGoalTeamAway() + " ";
                 } else {
-                    sb.append(" x-x ");
+                    temp += " x-x ";
                 }
-                sb.append(m.getTeamAway().getName());
+                temp += m.getTeamAway().getName();
+                createTextView(temp, Color.BLACK);
             }
-            sb.append("\n");
             week++;
         }
-        tvMatches.setText(sb.toString());
+    }
+
+    private void createTextView(String message, int color) {
+        TextView tv = new TextView(getContext());
+        tv.setTypeface(mTypeface);
+        tv.setGravity(Gravity.CENTER);
+        tv.setText(message);
+        tv.setTextColor(color);
+        tv.setLayoutParams(
+                new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+        );
+        mLinearLayout.addView(tv);
     }
 }

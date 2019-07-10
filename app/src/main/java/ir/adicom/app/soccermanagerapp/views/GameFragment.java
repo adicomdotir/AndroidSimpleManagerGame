@@ -1,11 +1,15 @@
 package ir.adicom.app.soccermanagerapp.views;
 
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.greenrobot.greendao.query.QueryBuilder;
@@ -23,6 +27,9 @@ import ir.adicom.app.soccermanagerapp.model.MatchDao;
  * A simple {@link Fragment} subclass.
  */
 public class GameFragment extends Fragment {
+
+    private LinearLayout mLinearLayout;
+    private Typeface mTypeface;
 
     public GameFragment() {
         // Required empty public constructor
@@ -55,23 +62,41 @@ public class GameFragment extends Fragment {
         eventQueryBuilder.where(EventDao.Properties.MatchId.eq(match.getId()));
         List<Event> events = eventQueryBuilder.list();
 
+        mLinearLayout =  (LinearLayout) view.findViewById(R.id.ll_game);
+        mTypeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/IRANSansMobile(FaNum).ttf");
+
         StringBuilder sb = new StringBuilder();
         sb.append(match.getTeamHome().getName());
         sb.append(" " + match.getGoalTeamHome());
         sb.append("-" + match.getGoalTeamAway() + " ");
         sb.append(match.getTeamAway().getName() + "\n");
+        createTextView(sb.toString(), Color.BLACK);
+
         for (Event event : events) {
             String temp = event.getEventDetail().getTitle();
             temp = temp.replace("x", event.getPlayer().getName());
             if (event.getIsGoal()) {
                 temp += " و گل";
+                createTextView(temp, Color.GREEN);
             } else {
                 temp += " و توپ به بیرون میره";
+                createTextView(temp, Color.RED);
             }
-            sb.append(temp + "\n");
         }
+    }
 
-        TextView tv = (TextView) view.findViewById(R.id.tv_game);
-        tv.setText(sb.toString());
+    private void createTextView(String message, int color) {
+        TextView tv = new TextView(getContext());
+        tv.setTypeface(mTypeface);
+        tv.setGravity(Gravity.CENTER);
+        tv.setText(message);
+        tv.setTextColor(color);
+        tv.setLayoutParams(
+                new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+        );
+        mLinearLayout.addView(tv);
     }
 }
