@@ -1,13 +1,10 @@
 package ir.adicom.app.soccermanagerapp.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,8 +39,6 @@ public class MatchAdapter extends ArrayAdapter<MatchViewModel> implements View.O
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_match, parent, false);
         }
-
-        LinearLayout layout = (LinearLayout) convertView.findViewById(R.id.ll_match_parent);
 
         TextView tvWeek = (TextView) convertView.findViewById(R.id.tv_week);
         tvWeek.setText("هفته " + matchViewModel.getWeekId());

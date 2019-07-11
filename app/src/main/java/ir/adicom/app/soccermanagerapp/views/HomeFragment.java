@@ -98,9 +98,9 @@ public class HomeFragment extends Fragment {
         txtHome.setText(sb.toString());
 
         final Button btnGame = (Button) view.findViewById(R.id.btn_game);
-        if (App.weekIndex > App.size * 2 - 2) {
-            btnGame.setEnabled(false);
-        }
+//        if (App.weekIndex > App.size * 2) {
+//            btnGame.setEnabled(false);
+//        }
         final Fragment fragment = this;
         btnGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,9 +114,16 @@ public class HomeFragment extends Fragment {
                         FragmentTransaction ft = getFragmentManager().beginTransaction();
                         ft.replace(R.id.content_main, new GameFragment());
                         ft.commit();
+                    } else {
+                        App.weekIndex++;
+                        if (App.weekIndex == App.size * 2 && App.day == 112) {
+                            btnGame.setEnabled(false);
+                        }
                     }
-                } else if (App.day % 7 == 6) {
+                } else if (App.day % 7 == 6 && App.weekIndex <= (App.size - 1) * 2) {
                     btnGame.setText("انجام بازی");
+                } else if (App.day % 7 == 6 && App.day == 111) {
+                    btnGame.setText("فصل جدید");
                 }
                 App.day++;
                 updateCalendarColor();

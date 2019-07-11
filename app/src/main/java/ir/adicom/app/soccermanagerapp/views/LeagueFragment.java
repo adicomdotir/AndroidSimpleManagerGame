@@ -122,6 +122,7 @@ public class LeagueFragment extends Fragment {
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
             tv.setText(tables.get(i).getTeam().getName());
+            tv.setTag(tables.get(i).getId());
             tv.setTypeface(tf);
             tv.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -129,7 +130,7 @@ public class LeagueFragment extends Fragment {
                     FragmentTransaction ft = getFragmentManager().beginTransaction();
                     PlayersFragment playersFragment = new PlayersFragment();
                     Bundle bundle = new Bundle();
-                    bundle.putLong("team_id", teamId);
+                    bundle.putLong("team_id", (Long) v.getTag());
                     playersFragment.setArguments(bundle);
                     ft.replace(R.id.content_main, playersFragment);
                     ft.commit();

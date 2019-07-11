@@ -75,10 +75,17 @@ public class GameFragment extends Fragment {
         mTypeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/IRANSansMobile(FaNum).ttf");
 
         StringBuilder sb = new StringBuilder();
-        sb.append(match.getTeamHome().getName());
-        sb.append(" " + match.getGoalTeamHome());
-        sb.append("-" + match.getGoalTeamAway() + " ");
-        sb.append(match.getTeamAway().getName() + "\n");
+        if (match.getGoalTeamHome() != -1 && match.getGoalTeamAway() != -1) {
+            sb.append(match.getTeamHome().getName());
+            sb.append(" " + match.getGoalTeamHome());
+            sb.append("-" + match.getGoalTeamAway() + " ");
+            sb.append(match.getTeamAway().getName() + "\n");
+        } else {
+            sb.append(match.getTeamHome().getName());
+            sb.append(" x-x ");
+            sb.append(match.getTeamAway().getName() + "\n");
+            sb.append("این بازی برگزار نشده است");
+        }
         createTextView(sb.toString(), Color.BLACK);
 
         for (Event event : events) {
