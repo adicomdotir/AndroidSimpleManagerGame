@@ -45,15 +45,24 @@ public class GameFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         MatchDao matchDao = ((App) getActivity().getApplication()).getDaoSession().getMatchDao();
-        QueryBuilder<Match> qb = matchDao.queryBuilder();
-        qb.where(MatchDao.Properties.WeekId.eq(App.weekIndex - 1));
-        List<Match> matches = qb.list();
         Match match = null;
-        for (int i = 0; i < matches.size(); i++) {
-            if (matches.get(i).getTeamAwayId() == App.teamId || matches.get(i).getTeamHomeId() == App.teamId) {
-                match = matches.get(i);
-                break;
+        long matchId = 0;
+
+        Bundle bundle = getArguments();
+        if (bundle != null) matchId = bundle.getLong("match_id");
+        if (matchId != 0) {
+            match = matchDao.load(matchId);
+        } else {
+            QueryBuilder<Match> qb = matchDao.queryBuilder();
+            qb.where(MatchDao.Properties.WeekId.eq(App.weekIndex - 1));
+            List<Match> matches = qb.list();
+            for (int i = 0; i < matches.size(); i++) {
+                if (matches.get(i).getTeamAwayId() == App.teamId || matches.get(i).getTeamHomeId() == App.teamId) {
+                    match = matches.get(i);
+                    break;
+                }
             }
         }
 

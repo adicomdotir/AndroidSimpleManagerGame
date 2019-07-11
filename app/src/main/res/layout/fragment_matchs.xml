@@ -4,15 +4,9 @@
     android:layout_height="match_parent"
     tools:context="ir.adicom.app.soccermanagerapp.views.MatchesFragment">
 
-    <ScrollView
+    <ListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/ll_match"
-            android:gravity="center"></LinearLayout>
-    </ScrollView>
+        android:layout_height="match_parent"
+        android:id="@+id/lv_matches"></ListView>
 
 </FrameLayout>
