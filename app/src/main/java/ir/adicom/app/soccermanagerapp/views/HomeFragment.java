@@ -18,6 +18,7 @@ import java.util.Random;
 
 import ir.adicom.app.soccermanagerapp.App;
 import ir.adicom.app.soccermanagerapp.R;
+import ir.adicom.app.soccermanagerapp.data.TempTable;
 import ir.adicom.app.soccermanagerapp.model.Event;
 import ir.adicom.app.soccermanagerapp.model.EventDao;
 import ir.adicom.app.soccermanagerapp.model.EventDetail;
@@ -51,48 +52,40 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        int playerCount = 0;
-//
-//        for (int i = 0; i < LocalData.players.length; i++) {
-//            if (LocalData.players[i].getTeamId() == 1) {
-//                playerCount++;
-//            }
-//        }
-        int previousWeek = App.weekIndex - 1;
-
         TextView tvWeek = (TextView) view.findViewById(R.id.tv_week);
         tvWeek.setText("هفته " + (App.weekIndex));
 
         StringBuilder sb = new StringBuilder();
-//        sb.append(team.getName() + "\n");
-//        sb.append("قدرت: " + LocalData.teams[0].getOverral() + "\n");
-        sb.append("رتبه تیم: " + 1 + "\n");
+        sb.append(App.teamName + "\n");
+        sb.append("رتبه تیم: " + TempTable.getTeamRank(App.teamId) + "\n");
         sb.append("تعداد بازیکنان: " + 11 + "\n");
-//        for (int i = 0; i < LocalData.matches.length; i++) {
-//            if (LocalData.matches[i].getWeekId() == App.weekIndex) {
-//                if (LocalData.matches[i].getTeamHome() == 0) {
-//                    sb.append("حریف بعدی: " + LocalData.teams[LocalData.matches[i].getTeamAway()].getName());
-//                } else {
-//                    if (LocalData.matches[i].getTeamAway() == 0) {
-//                        sb.append("حریف بعدی: " + LocalData.teams[LocalData.matches[i].getTeamHome()].getName());
-//                    }
-//                }
-//                if (previousWeek >= 1 && LocalData.matches[i].getWeekId() == previousWeek) {
-//                    sb.append(LocalData.teams[LocalData.matches[i].getTeamHome()].getName() + " " +
-//                            LocalData.matches[i].getGoalTeamHome() + "-" + LocalData.matches[i].getGoalTeamAway() + " " +
-//                            LocalData.teams[LocalData.matches[i].getTeamAway()].getName());
-//                }
-//            }
-//        }
-//        for (int i = 0; i < LocalData.matches.length; i++) {
-//            if (LocalData.matches[i].getWeekId() == previousWeek) {
-//                if (LocalData.matches[i].getTeamHome() == 0 || LocalData.matches[i].getTeamAway() == 0) {
-//                    sb.append("\nبازی گذشته : " + LocalData.teams[LocalData.matches[i].getTeamHome()].getName() + " " +
-//                            LocalData.matches[i].getGoalTeamHome() + "-" + LocalData.matches[i].getGoalTeamAway() + " " +
-//                            LocalData.teams[LocalData.matches[i].getTeamAway()].getName());
-//                }
-//            }
-//        }
+
+        MatchDao matchDao = ((App) getActivity().getApplication()).getDaoSession().getMatchDao();
+        if (App.weekIndex <= App.size * 2 - 2) {
+            QueryBuilder<Match> qb = matchDao.queryBuilder();
+            qb.where(MatchDao.Properties.WeekId.eq(App.weekIndex))
+                    .or(MatchDao.Properties.TeamAwayId.eq(App.teamId), MatchDao.Properties.TeamHomeId.eq(App.teamId));
+            List<Match> matches = qb.list();
+            sb.append("حریف بعدی: ");
+            if (matches.get(0).getTeamHomeId() == App.teamId) {
+
+                sb.append(matches.get(0).getTeamAway().getName() + "(" + TempTable.getTeamRank(matches.get(0).getTeamAwayId()) + ")");
+            } else {
+                sb.append(matches.get(0).getTeamHome().getName() + "(" + TempTable.getTeamRank(matches.get(0).getTeamHomeId()) + ")");
+            }
+
+            if (App.weekIndex > 1) {
+                qb = matchDao.queryBuilder();
+                qb.where(MatchDao.Properties.WeekId.eq(App.weekIndex - 1))
+                        .or(MatchDao.Properties.TeamAwayId.eq(App.teamId), MatchDao.Properties.TeamHomeId.eq(App.teamId));
+                matches = qb.list();
+                sb.append("\n");
+                sb.append("بازی گذشته: ");
+                sb.append(matches.get(0).getTeamHome().getName());
+                sb.append(" " + matches.get(0).getGoalTeamHome() + "-" + matches.get(0).getGoalTeamAway() + " ");
+                sb.append(matches.get(0).getTeamAway().getName());
+            }
+        }
 
         final TextView txtHome = (TextView) view.findViewById(R.id.txt_home);
         txtHome.setText(sb.toString());
@@ -109,16 +102,17 @@ public class HomeFragment extends Fragment {
                     if (App.weekIndex <= (App.size - 1) * 2) {
                         gameProcess();
                         App.weekIndex++;
-//                        FragmentTransaction ft = getFragmentManager().beginTransaction();
-//                        ft.detach(fragment).attach(fragment).commit();
                         FragmentTransaction ft = getFragmentManager().beginTransaction();
+                        ft.detach(fragment).attach(fragment).commit();
+                        ft = getFragmentManager().beginTransaction();
                         ft.replace(R.id.content_main, new GameFragment());
                         ft.commit();
+                        createOrUpdateTempTableData();
                     } else {
-                        App.weekIndex++;
                         if (App.weekIndex == App.size * 2 && App.day == 112) {
                             btnGame.setEnabled(false);
                         }
+                        App.weekIndex++;
                     }
                 } else if (App.day % 7 == 6 && App.weekIndex <= (App.size - 1) * 2) {
                     btnGame.setText("انجام بازی");
@@ -131,6 +125,14 @@ public class HomeFragment extends Fragment {
         });
 
         updateCalendarColor();
+    }
+
+    private void createOrUpdateTempTableData() {
+        TableDao tableDao = ((App) getActivity().getApplication()).getDaoSession().getTableDao();
+        List<Table> tables = tableDao.queryBuilder().orderDesc(TableDao.Properties.Pts, TableDao.Properties.Gd).list();
+        for (int i = 0; i < tables.size(); i++) {
+            TempTable.myMap.put(tables.get(i).getTeamId(), i + 1);
+        }
     }
 
     private void updateCalendarColor() {

@@ -48,10 +48,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initNavInfo(NavigationView navigationView) {
-//        TextView navTeamName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_team_name);
-//        TextView navTeamNickname = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_team_nickname);
-//        navTeamName.setText(LocalData.teams[0].getName());
-//        navTeamNickname.setText(LocalData.teams[0].getNickname());
+        TextView navTeamName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_team_name);
+        navTeamName.setText(App.teamName);
     }
 
     @Override

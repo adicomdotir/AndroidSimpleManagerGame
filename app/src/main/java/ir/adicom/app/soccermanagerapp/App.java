@@ -17,6 +17,7 @@ public class App extends Application {
     public static int day = 1;
     public static int size = 8;
     public static long teamId = -1;
+    public static String teamName = "";
 
     private DaoSession daoSession;
 
