@@ -5,35 +5,35 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Home" />
+            android:title="خانه" />
         <item
             android:id="@+id/nav_players"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Players" />
+            android:title="بازیکنان" />
         <item
             android:id="@+id/nav_matches"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Matches" />
+            android:title="مسابقات" />
         <item
             android:id="@+id/nav_league"
             android:icon="@drawable/ic_menu_manage"
-            android:title="League" />
+            android:title="لیگ" />
         <item
             android:id="@+id/nav_transfers"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Transfers" />
+            android:title="نقل و انتقالات" />
     </group>
 
-    <item android:title="Others">
+    <item android:title="اضافات">
         <menu>
             <item
                 android:id="@+id/nav_about"
                 android:icon="@drawable/ic_menu_share"
-                android:title="About App" />
+                android:title="درباره اپ" />
             <item
                 android:id="@+id/nav_contact"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Contact Us" />
+                android:title="تماس با ما" />
         </menu>
     </item>
 

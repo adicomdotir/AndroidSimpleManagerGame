@@ -4,8 +4,14 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">تنظیمات</string>
     <string name="title_activity_main2">Main2Activity</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">خانه</string>
+    <string name="game">گزارش</string>
+    <string name="league">لیگ</string>
+    <string name="matches">مسابقات</string>
+    <string name="players">بازیکنان</string>
+    <string name="transfer">نقل و انتقالات</string>
 </resources>
