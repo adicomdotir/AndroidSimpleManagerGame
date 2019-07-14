@@ -29,10 +29,10 @@
             android:text="TextView"
             android:layout_width="0px"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:id="@+id/tv_g1_right"
             android:textColor="@color/black"
             android:gravity="center"
-            android:id="@+id/tv_g1_left" />
+            android:layout_weight="1" />
 
         <TextView
             android:text="TextView"
@@ -47,10 +47,10 @@
             android:text="TextView"
             android:layout_width="0px"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_g1_right"
+            android:layout_weight="1"
             android:textColor="@color/black"
             android:gravity="center"
-            android:layout_weight="1" />
+            android:id="@+id/tv_g1_left" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -61,10 +61,10 @@
             android:text="TextView"
             android:layout_width="0px"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:id="@+id/tv_g2_right"
             android:textColor="@color/black"
             android:gravity="center"
-            android:id="@+id/tv_g2_left" />
+            android:layout_weight="1" />
 
         <TextView
             android:text="TextView"
@@ -79,10 +79,11 @@
             android:text="TextView"
             android:layout_width="0px"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_g2_right"
+            android:layout_weight="1"
             android:textColor="@color/black"
             android:gravity="center"
-            android:layout_weight="1" />
+            android:id="@+id/tv_g2_left" />
+
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -93,10 +94,10 @@
             android:text="TextView"
             android:layout_width="0px"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:id="@+id/tv_g3_right"
             android:textColor="@color/black"
             android:gravity="center"
-            android:id="@+id/tv_g3_left" />
+            android:layout_weight="1" />
 
         <TextView
             android:text="TextView"
@@ -111,10 +112,10 @@
             android:text="TextView"
             android:layout_width="0px"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_g3_right"
+            android:layout_weight="1"
             android:textColor="@color/black"
             android:gravity="center"
-            android:layout_weight="1" />
+            android:id="@+id/tv_g3_left" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -125,10 +126,10 @@
             android:text="TextView"
             android:layout_width="0px"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:id="@+id/tv_g4_right"
             android:textColor="@color/black"
             android:gravity="center"
-            android:id="@+id/tv_g4_left" />
+            android:layout_weight="1" />
 
         <TextView
             android:text="TextView"
@@ -143,10 +144,10 @@
             android:text="TextView"
             android:layout_width="0px"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_g4_right"
+            android:layout_weight="1"
             android:textColor="@color/black"
             android:gravity="center"
-            android:layout_weight="1" />
+            android:id="@+id/tv_g4_left" />
     </LinearLayout>
 
 </LinearLayout>

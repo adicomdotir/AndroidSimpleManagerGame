@@ -11,14 +11,6 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/tv_player_age"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@android:color/black" />
-
-        <TextView
             android:id="@+id/tv_player_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -27,6 +19,14 @@
             android:textColor="@android:color/black"
             android:textSize="16sp"
             android:textStyle="normal|bold" />
+
+        <TextView
+            android:id="@+id/tv_player_age"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@android:color/black" />
 
     </LinearLayout>
 
@@ -58,6 +58,14 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/tv_player_scoring"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@android:color/holo_red_dark" />
+
+        <TextView
             android:id="@+id/tv_player_defending"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -73,13 +81,6 @@
             android:gravity="center"
             android:textColor="@android:color/holo_green_dark" />
 
-        <TextView
-            android:id="@+id/tv_player_scoring"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@android:color/holo_red_dark" />
     </LinearLayout>
 
 </LinearLayout>

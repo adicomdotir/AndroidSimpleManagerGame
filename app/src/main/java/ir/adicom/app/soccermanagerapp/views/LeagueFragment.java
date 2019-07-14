@@ -59,70 +59,6 @@ public class LeagueFragment extends Fragment {
             textViewSetColor(tv, i);
             tv.setGravity(Gravity.CENTER);
             tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-            tv.setText("" + tables.get(i).getPts());
-            tv.setTypeface(tf);
-            row.addView(tv);
-
-            tv = new TextView(view.getContext());
-            textViewSetColor(tv, i);
-            tv.setGravity(Gravity.CENTER);
-            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-            tv.setText("" + tables.get(i).getGd());
-            tv.setTypeface(tf);
-            row.addView(tv);
-
-            tv = new TextView(view.getContext());
-            textViewSetColor(tv, i);
-            tv.setGravity(Gravity.CENTER);
-            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-            tv.setText("" + tables.get(i).getGa());
-            tv.setTypeface(tf);
-            row.addView(tv);
-
-            tv = new TextView(view.getContext());
-            textViewSetColor(tv, i);
-            tv.setGravity(Gravity.CENTER);
-            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-            tv.setText("" + tables.get(i).getGf());
-            tv.setTypeface(tf);
-            row.addView(tv);
-
-            tv = new TextView(view.getContext());
-            textViewSetColor(tv, i);
-            tv.setGravity(Gravity.CENTER);
-            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-            tv.setText("" + tables.get(i).getLose());
-            tv.setTypeface(tf);
-            row.addView(tv);
-
-            tv = new TextView(view.getContext());
-            textViewSetColor(tv, i);
-            tv.setGravity(Gravity.CENTER);
-            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-            tv.setText("" + tables.get(i).getDraw());
-            tv.setTypeface(tf);
-            row.addView(tv);
-
-            tv = new TextView(view.getContext());
-            textViewSetColor(tv, i);
-            tv.setGravity(Gravity.CENTER);
-            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-            tv.setText("" + tables.get(i).getWin());
-            tv.setTypeface(tf);
-            row.addView(tv);
-
-            tv = new TextView(view.getContext());
-            textViewSetColor(tv, i);
-            tv.setGravity(Gravity.CENTER);
-            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-            tv.setText("" + (tables.get(i).getWin() + tables.get(i).getDraw() + tables.get(i).getLose()));
-            tv.setTypeface(tf);
-            row.addView(tv);
-
-            tv = new TextView(view.getContext());
-            textViewSetColor(tv, i);
-            tv.setGravity(Gravity.CENTER);
-            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
             tv.setText(tables.get(i).getTeam().getName());
             tv.setTag(tables.get(i).getId());
             tv.setTypeface(tf);
@@ -138,6 +74,70 @@ public class LeagueFragment extends Fragment {
                     ft.commit();
                 }
             });
+            row.addView(tv);
+
+            tv = new TextView(view.getContext());
+            textViewSetColor(tv, i);
+            tv.setGravity(Gravity.CENTER);
+            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+            tv.setText("" + (tables.get(i).getWin() + tables.get(i).getDraw() + tables.get(i).getLose()));
+            tv.setTypeface(tf);
+            row.addView(tv);
+
+            tv = new TextView(view.getContext());
+            textViewSetColor(tv, i);
+            tv.setGravity(Gravity.CENTER);
+            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+            tv.setText("" + tables.get(i).getWin());
+            tv.setTypeface(tf);
+            row.addView(tv);
+
+            tv = new TextView(view.getContext());
+            textViewSetColor(tv, i);
+            tv.setGravity(Gravity.CENTER);
+            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+            tv.setText("" + tables.get(i).getDraw());
+            tv.setTypeface(tf);
+            row.addView(tv);
+
+            tv = new TextView(view.getContext());
+            textViewSetColor(tv, i);
+            tv.setGravity(Gravity.CENTER);
+            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+            tv.setText("" + tables.get(i).getLose());
+            tv.setTypeface(tf);
+            row.addView(tv);
+
+            tv = new TextView(view.getContext());
+            textViewSetColor(tv, i);
+            tv.setGravity(Gravity.CENTER);
+            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+            tv.setText("" + tables.get(i).getGf());
+            tv.setTypeface(tf);
+            row.addView(tv);
+
+            tv = new TextView(view.getContext());
+            textViewSetColor(tv, i);
+            tv.setGravity(Gravity.CENTER);
+            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+            tv.setText("" + tables.get(i).getGa());
+            tv.setTypeface(tf);
+            row.addView(tv);
+
+            tv = new TextView(view.getContext());
+            textViewSetColor(tv, i);
+            tv.setGravity(Gravity.CENTER);
+            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+            tv.setText("" + tables.get(i).getGd());
+            tv.setTypeface(tf);
+            row.addView(tv);
+
+            tv = new TextView(view.getContext());
+            textViewSetColor(tv, i);
+            tv.setGravity(Gravity.CENTER);
+            tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+            tv.setText("" + tables.get(i).getPts());
+            tv.setTypeface(tf);
             row.addView(tv);
 
             tableLayout.addView(row);
