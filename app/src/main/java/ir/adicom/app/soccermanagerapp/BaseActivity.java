@@ -1,5 +1,6 @@
 package ir.adicom.app.soccermanagerapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -7,9 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-public class BaseActivity extends AppCompatActivity {
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
-    private static final String TAG = "TAG";
+public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,5 +30,11 @@ public class BaseActivity extends AppCompatActivity {
             }
         });
         Button btnLoad = (Button) findViewById(R.id.btn_load);
+        btnLoad.setEnabled(false);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 }

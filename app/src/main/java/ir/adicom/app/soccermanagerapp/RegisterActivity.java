@@ -1,5 +1,6 @@
 package ir.adicom.app.soccermanagerapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 import ir.adicom.app.soccermanagerapp.data.FirstData;
 import ir.adicom.app.soccermanagerapp.data.LocalData;
 import ir.adicom.app.soccermanagerapp.model.EventDetail;
@@ -89,6 +91,11 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 
     private void addSeedEventDetail() {

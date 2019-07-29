@@ -8,19 +8,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import org.greenrobot.greendao.query.QueryBuilder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ir.adicom.app.soccermanagerapp.App;
 import ir.adicom.app.soccermanagerapp.R;
 import ir.adicom.app.soccermanagerapp.adapters.PlayersAdapter;
-import ir.adicom.app.soccermanagerapp.data.LocalData;
 import ir.adicom.app.soccermanagerapp.model.Player;
 import ir.adicom.app.soccermanagerapp.model.PlayerDao;
 import ir.adicom.app.soccermanagerapp.model.TeamDao;

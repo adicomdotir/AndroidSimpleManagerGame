@@ -9,14 +9,14 @@
     tools:context="ir.adicom.app.soccermanagerapp.BaseActivity">
 
     <Button
-        android:text="New Game"
+        android:text="بازی جدید"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btn_load"
         android:id="@+id/btn_new" />
 
     <Button
-        android:text="Load"
+        android:text="ادامه بازی"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btn_load"/>

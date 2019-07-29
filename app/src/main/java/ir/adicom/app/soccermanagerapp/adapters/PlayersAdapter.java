@@ -12,7 +12,8 @@ import ir.adicom.app.soccermanagerapp.R;
 import ir.adicom.app.soccermanagerapp.model.Player;
 
 /**
- * Created by adicom on 4/20/18.
+ *
+ * Created by Y.P on 4/20/18.
  */
 
 public class PlayersAdapter extends ArrayAdapter<Player> {
@@ -38,6 +39,7 @@ public class PlayersAdapter extends ArrayAdapter<Player> {
         TextView tvPlayerForm = (TextView) convertView.findViewById(R.id.tv_player_form);
         TextView tvPlayerStamina = (TextView) convertView.findViewById(R.id.tv_player_stamina);
 
+        assert player != null;
         tvPlayerName.setText(player.getShirtNumber() + ". " + player.getName());
         tvPlayerAge.setText("سن: " + player.getAge() + " سال و " + player.getAgeSub() + " روز");
         tvPlayerScoring.setText("گلزنی: " + (int) player.getScoring());

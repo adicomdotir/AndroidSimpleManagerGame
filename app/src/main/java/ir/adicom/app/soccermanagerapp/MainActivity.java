@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
-import ir.adicom.app.soccermanagerapp.data.LocalData;
 import ir.adicom.app.soccermanagerapp.model.Player;
 import ir.adicom.app.soccermanagerapp.views.HomeFragment;
 import ir.adicom.app.soccermanagerapp.views.LeagueFragment;
@@ -51,6 +50,10 @@ public class MainActivity extends AppCompatActivity
 
 //        players = LocalData.players;
         initNavInfo(navigationView);
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content_main, new HomeFragment());
+        ft.commit();
     }
 
     private void initNavInfo(NavigationView navigationView) {

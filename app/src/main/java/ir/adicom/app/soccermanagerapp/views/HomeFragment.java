@@ -30,12 +30,14 @@ import ir.adicom.app.soccermanagerapp.model.Player;
 import ir.adicom.app.soccermanagerapp.model.PlayerDao;
 import ir.adicom.app.soccermanagerapp.model.Table;
 import ir.adicom.app.soccermanagerapp.model.TableDao;
+import ir.adicom.app.soccermanagerapp.tasks.PlayerAgeTask;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
-
+    private Button btnGame;
+    private Fragment fragment;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -93,41 +95,52 @@ public class HomeFragment extends Fragment {
         final TextView txtHome = (TextView) view.findViewById(R.id.txt_home);
         txtHome.setText(sb.toString());
 
-        final Button btnGame = (Button) view.findViewById(R.id.btn_game);
+        btnGame = (Button) view.findViewById(R.id.btn_game);
 //        if (App.weekIndex > App.size * 2) {
 //            btnGame.setEnabled(false);
 //        }
-        final Fragment fragment = this;
+        fragment = this;
         btnGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (App.day % 7 == 0) {
-                    if (App.weekIndex <= (App.size - 1) * 2) {
-                        gameProcess();
-                        App.weekIndex++;
-                        FragmentTransaction ft = getFragmentManager().beginTransaction();
-                        ft.detach(fragment).attach(fragment).commit();
-                        ft = getFragmentManager().beginTransaction();
-                        ft.replace(R.id.content_main, new GameFragment());
-                        ft.commit();
-                        createOrUpdateTempTableData();
-                    } else {
-                        if (App.weekIndex == App.size * 2 && App.day == 112) {
-                            btnGame.setEnabled(false);
-                        }
-                        App.weekIndex++;
-                    }
-                } else if (App.day % 7 == 6 && App.weekIndex <= (App.size - 1) * 2) {
-                    btnGame.setText("انجام بازی");
-                } else if (App.day % 7 == 6 && App.day == 111) {
-                    btnGame.setText("فصل جدید");
-                }
-                App.day++;
-                updateCalendarColor();
+                updatePlayerAge();
             }
         });
 
         updateCalendarColor();
+    }
+
+    public void onClickContinue() {
+        if (App.day % 7 == 0) {
+            if (App.weekIndex <= (App.size - 1) * 2) {
+                gameProcess();
+                App.weekIndex++;
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.detach(fragment).attach(fragment).commit();
+                ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.content_main, new GameFragment());
+                ft.commit();
+                createOrUpdateTempTableData();
+            } else {
+                if (App.weekIndex == App.size * 2 && App.day == 112) {
+                    btnGame.setEnabled(false);
+                }
+                App.weekIndex++;
+            }
+        } else if (App.day % 7 == 6 && App.weekIndex <= (App.size - 1) * 2) {
+            btnGame.setText("انجام بازی");
+        } else if (App.day % 7 == 6 && App.day == 111) {
+            btnGame.setText("فصل جدید");
+        }
+        App.day++;
+        updateCalendarColor();
+    }
+
+    private void updatePlayerAge() {
+        PlayerDao playerDao = ((App) getActivity().getApplication()).getDaoSession().getPlayerDao();
+        List<Player> players = playerDao.loadAll();
+        PlayerAgeTask playerAgeTask = new PlayerAgeTask(this, playerDao);
+        playerAgeTask.execute(players);
     }
 
     private void createOrUpdateTempTableData() {

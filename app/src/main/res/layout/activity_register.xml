@@ -9,7 +9,7 @@
     android:padding="16dp">
 
     <TextView
-        android:text="Select team"
+        android:text="تیم خود را انتخاب کنید:"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tv_team_name" />
@@ -25,7 +25,7 @@
         android:layout_height="48dp"></LinearLayout>
 
     <Button
-        android:text="Register"
+        android:text="ثبت نام"
         android:id="@+id/btn_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
