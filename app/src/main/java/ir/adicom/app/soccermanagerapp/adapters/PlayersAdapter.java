@@ -41,7 +41,7 @@ public class PlayersAdapter extends ArrayAdapter<Player> {
 
         assert player != null;
         tvPlayerName.setText(player.getShirtNumber() + ". " + player.getName());
-        tvPlayerAge.setText("سن: " + player.getAge() + " سال و " + player.getAgeSub() + " روز");
+        tvPlayerAge.setText("سن: " + player.getAge() + " سال");
         tvPlayerScoring.setText("گلزنی: " + (int) player.getScoring());
         tvPlayerGk.setText("دروازبانی: " + (int) player.getGoalkeeper());
         tvPlayerDefending.setText("دفاع: " + (int) player.getDefending());

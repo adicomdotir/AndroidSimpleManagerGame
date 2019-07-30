@@ -87,7 +87,7 @@ public class LocalData {
                 n = (int) (Math.random() * FirstData.LAST_NAMES.length);
                 fullName += " " + FirstData.LAST_NAMES[n];
                 player.setAge((int) (Math.random() * 17 + 17));
-                player.setAgeSub((int) (Math.random() * 111 + 1));
+                player.setAgeSub(0);
                 player.setShirtNumber(j + 1);
 
                 player.setName(fullName);

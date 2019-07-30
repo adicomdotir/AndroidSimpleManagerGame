@@ -30,7 +30,7 @@ import ir.adicom.app.soccermanagerapp.model.Player;
 import ir.adicom.app.soccermanagerapp.model.PlayerDao;
 import ir.adicom.app.soccermanagerapp.model.Table;
 import ir.adicom.app.soccermanagerapp.model.TableDao;
-import ir.adicom.app.soccermanagerapp.tasks.PlayerAgeTask;
+import ir.adicom.app.soccermanagerapp.tasks.PlayerTraining;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -103,7 +103,7 @@ public class HomeFragment extends Fragment {
         btnGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updatePlayerAge();
+                onClickContinue();
             }
         });
 
@@ -131,16 +131,18 @@ public class HomeFragment extends Fragment {
             btnGame.setText("انجام بازی");
         } else if (App.day % 7 == 6 && App.day == 111) {
             btnGame.setText("فصل جدید");
+        } else if (App.day % 7 == 5) {
+            playerTraining();
         }
         App.day++;
         updateCalendarColor();
     }
 
-    private void updatePlayerAge() {
+    private void playerTraining() {
         PlayerDao playerDao = ((App) getActivity().getApplication()).getDaoSession().getPlayerDao();
         List<Player> players = playerDao.loadAll();
-        PlayerAgeTask playerAgeTask = new PlayerAgeTask(this, playerDao);
-        playerAgeTask.execute(players);
+        PlayerTraining playerTraining = new PlayerTraining(this, playerDao);
+        playerTraining.execute(players);
     }
 
     private void createOrUpdateTempTableData() {
