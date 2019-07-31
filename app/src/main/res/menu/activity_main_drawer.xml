@@ -22,6 +22,10 @@
             android:id="@+id/nav_transfers"
             android:icon="@drawable/ic_menu_manage"
             android:title="نقل و انتقالات" />
+        <item
+            android:id="@+id/nav_statistic"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="بازیکنان برتر" />
     </group>
 
     <item android:title="اضافات">
