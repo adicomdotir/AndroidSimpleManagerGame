@@ -37,7 +37,7 @@ public class StatisticAdapter extends ArrayAdapter<StatisticViewModel> {
         TextView tvTeamName = (TextView) convertView.findViewById(R.id.tv_team_name);
 
         tvPlayerName.setText(statisticViewModel.getPlayerName());
-        tvNumber.setText("" + statisticViewModel.getGoalNumber());
+        tvNumber.setText("" + statisticViewModel.getGoalNumber() + " گل");
         tvTeamName.setText(statisticViewModel.getTeamName());
 
         return convertView;

@@ -1,33 +1,24 @@
 package ir.adicom.app.soccermanagerapp.views;
 
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.greenrobot.greendao.query.QueryBuilder;
-
-import java.util.List;
 
 import ir.adicom.app.soccermanagerapp.App;
 import ir.adicom.app.soccermanagerapp.R;
 import ir.adicom.app.soccermanagerapp.adapters.MatchAdapter;
-import ir.adicom.app.soccermanagerapp.adapters.PlayersAdapter;
-import ir.adicom.app.soccermanagerapp.data.LocalData;
 import ir.adicom.app.soccermanagerapp.model.Match;
 import ir.adicom.app.soccermanagerapp.model.MatchDao;
 import ir.adicom.app.soccermanagerapp.model.MatchViewModel;
-import ir.adicom.app.soccermanagerapp.model.Player;
-import ir.adicom.app.soccermanagerapp.model.PlayerDao;
 
 /**
  * A simple {@link Fragment} subclass.

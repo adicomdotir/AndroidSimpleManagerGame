@@ -7,6 +7,8 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/lv_matches"></ListView>
+        android:id="@+id/lv_matches"
+        android:dividerHeight="0dp"
+        android:divider="#FFFFFF"></ListView>
 
 </FrameLayout>

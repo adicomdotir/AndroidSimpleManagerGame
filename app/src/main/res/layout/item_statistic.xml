@@ -6,7 +6,6 @@
     android:padding="4dp">
 
     <TextView
-        android:text="TextView"
         android:layout_width="0px"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -15,20 +14,18 @@
         android:id="@+id/tv_player_name" />
 
     <TextView
-        android:text="TextView"
         android:layout_width="0px"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:textColor="@color/black"
+        android:textColor="@color/dark_slate_gray"
         android:id="@+id/tv_goal_number" />
 
     <TextView
-        android:text="TextView"
         android:layout_width="0px"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:textColor="@color/black"
+        android:textColor="@color/slate_gray"
         android:id="@+id/tv_team_name" />
 </LinearLayout>
