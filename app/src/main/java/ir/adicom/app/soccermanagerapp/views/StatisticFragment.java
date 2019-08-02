@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.greenrobot.greendao.query.QueryBuilder;
@@ -24,15 +25,17 @@ import java.util.Set;
 
 import ir.adicom.app.soccermanagerapp.App;
 import ir.adicom.app.soccermanagerapp.R;
+import ir.adicom.app.soccermanagerapp.adapters.StatisticAdapter;
 import ir.adicom.app.soccermanagerapp.model.Event;
 import ir.adicom.app.soccermanagerapp.model.EventDao;
 import ir.adicom.app.soccermanagerapp.model.MatchDao;
+import ir.adicom.app.soccermanagerapp.model.StatisticViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class StatisticFragment extends Fragment {
-
+    private List<Event> eventList;
 
     public StatisticFragment() {
         // Required empty public constructor
@@ -52,7 +55,7 @@ public class StatisticFragment extends Fragment {
 
         EventDao eventDao = ((App) getActivity().getApplication()).getDaoSession().getEventDao();
         QueryBuilder<Event> eventQueryBuilder = eventDao.queryBuilder();
-        List<Event> eventList = eventQueryBuilder.where(EventDao.Properties.IsGoal.eq(true)).list();
+        eventList = eventQueryBuilder.where(EventDao.Properties.IsGoal.eq(true)).list();
         Map<Long, Integer> topScorer = new HashMap<>();
         for (int i = 0; i < eventList.size(); i++) {
             Event tempEvent = eventList.get(i);
@@ -65,12 +68,30 @@ public class StatisticFragment extends Fragment {
         }
         topScorer = sortMapByValue(topScorer);
 
-        TextView tv = (TextView) view.findViewById(R.id.tv_statistic);
-        StringBuilder sb = new StringBuilder();
+        StatisticViewModel[] models = new StatisticViewModel[topScorer.size()];
+        int count = 0;
         for (Long id : topScorer.keySet()) {
-            sb.append(id + ": " + topScorer.get(id) + "\n");
+            StatisticViewModel model = getStatisticFromId(id, topScorer.get(id));
+            models[count] = model;
+            count++;
         }
-        tv.setText(sb.toString());
+
+        StatisticAdapter adapter = new StatisticAdapter(getContext(), models);
+        ListView lvMatches = (ListView) view.findViewById(R.id.lv_matches);
+        lvMatches.setAdapter(adapter);
+    }
+
+    private StatisticViewModel getStatisticFromId(Long id, int goalNumber) {
+        StatisticViewModel model = new StatisticViewModel();
+        for (int i = 0; i < eventList.size(); i++) {
+            if (eventList.get(i).getPlayerId().equals(id)) {
+                model.setGoalNumber(goalNumber);
+                model.setPlayerName(eventList.get(i).getPlayer().getName());
+                model.setTeamName(eventList.get(i).getTeam().getName());
+                break;
+            }
+        }
+        return model;
     }
 
     private Map<Long, Integer> sortMapByValue(Map<Long, Integer> inputMap) {
