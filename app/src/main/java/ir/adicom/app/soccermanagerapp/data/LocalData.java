@@ -13,12 +13,17 @@ import ir.adicom.app.soccermanagerapp.model.Team;
 import ir.adicom.app.soccermanagerapp.model.TeamDao;
 
 /**
+ *
  * Created by adicom on 4/14/18.
  */
 
 public class LocalData {
-    public  int playerSize;
-    public  Team[] teams;
+    private int[] divGroups = {
+            1,2
+    };
+
+    public int playerSize;
+    public Team[] teams;
     private App app;
 
     public  void init(App application) {
@@ -36,28 +41,32 @@ public class LocalData {
 
         teams[0] = new Team();
         teams[0].setName(team);
-        teams[0].setDiv(0);
-        teams[0].setGroup(0);
+        teams[0].setDiv(1);
+        teams[0].setGroup(1);
         teamDao.insert(teams[0]);
 
-        for (int i = 1; i < App.size; i++) {
-            int tnf = (int) (Math.random() * FirstData.TEAM_NAMES_FIRST.length);
-            int tns = (int) (Math.random() * FirstData.TEAM_NAMES_SECOND.length);
-            String teamName = FirstData.TEAM_NAMES_FIRST[tnf] + " " + FirstData.TEAM_NAMES_SECOND[tns];
-            boolean exist = false;
-            for (Team t : teams) {
-                if (t != null && t.getName().equals(teamName)) {
-                    exist = true;
+        for (int j = 1; j <= divGroups.length; j++) {
+            for (int k = 1; k <= divGroups[j - 1]; k++) {
+                for (int i = 1; i < App.size; i++) {
+                    int tnf = (int) (Math.random() * FirstData.TEAM_NAMES_FIRST.length);
+                    int tns = (int) (Math.random() * FirstData.TEAM_NAMES_SECOND.length);
+                    String teamName = FirstData.TEAM_NAMES_FIRST[tnf] + " " + FirstData.TEAM_NAMES_SECOND[tns];
+                    boolean exist = false;
+                    for (Team t : teams) {
+                        if (t != null && t.getName().equals(teamName)) {
+                            exist = true;
+                        }
+                    }
+                    if (!exist) {
+                        teams[i] = new Team();
+                        teams[i].setName(teamName);
+                        teams[i].setDiv(j);
+                        teams[i].setGroup(k);
+                        teamDao.insert(teams[i]);
+                    } else {
+                        i--;
+                    }
                 }
-            }
-            if (!exist) {
-                teams[i] = new Team();
-                teams[i].setName(teamName);
-                teams[i].setDiv(0);
-                teams[i].setGroup(0);
-                teamDao.insert(teams[i]);
-            } else {
-                i--;
             }
         }
 
@@ -73,8 +82,8 @@ public class LocalData {
             table.setGf(0);
             table.setGa(0);
             table.setPts(0);
-            table.setDiv(1);
-            table.setGroup(1);
+            table.setDiv(teamList.get(i).getDiv());
+            table.setGroup(teamList.get(i).getGroup());
             tableDao.insert(table);
 
             for (int j = 0; j < playerSize; j++) {
