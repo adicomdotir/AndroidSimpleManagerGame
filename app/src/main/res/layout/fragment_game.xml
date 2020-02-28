@@ -1,14 +1,44 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="ir.adicom.app.soccermanagerapp.views.GameFragment">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"
         android:id="@+id/ll_game"
         android:gravity="center"></LinearLayout>
 
-</FrameLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <Button
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:text="@string/home"
+            android:layout_height="match_parent">
+        </Button>
+        <Button
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:text="@string/matches"
+            android:layout_height="match_parent">
+        </Button>
+        <Button
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:text="@string/league"
+            android:layout_height="match_parent">
+        </Button>
+    </LinearLayout>
+
+</LinearLayout>
